@@ -145,8 +145,7 @@ void *connection_handler(void *sockfd) {
 				strcat(filename, subdir);
 				strcat(filename, "/");
 			}
-			File* fd;
-			fd = fopen(filename, "w");
+			FILE* fd= fopen(filename, "w");
 			if (!fd)
 				perror("fail to open file");
 			int n = 0;
@@ -165,8 +164,7 @@ void *connection_handler(void *sockfd) {
 			strcat(filename, pch);
 			int filensize = 0;
 			pch = strtok(NULL, " ");
-			FILE* fd;
-			fd = fopen(filename, "r");
+			FILE* fd= fopen(filename, "r");
 			int n = 0;
 			if (fd)
 			{
@@ -208,7 +206,7 @@ int set_config()
 		return 1;
 	}
 	char readBuf[BUFSIZE];
-	index = 0;
+	userindex = 0;
 	while (fgets(readBuf, BUFSIZE, (FILE*)fp))
 	{
 		char * pch;

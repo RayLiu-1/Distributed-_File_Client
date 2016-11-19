@@ -27,6 +27,7 @@ int userindex = 0;
 
 int set_server(int *sock, struct sockaddr_in *server, int index);
 int set_config(char file[]);
+//void *connection_handler(void *sockfd);
 
 void encrypt(char content[], char password[], int len)
 {
@@ -98,30 +99,30 @@ int main(int argc, char * argv[]) {
 				}
 				//if(strcpy())
 			}
-			
+			scanf("%s", sendbuf[i]);
 		}
 		//printf(Please enter command : );
-		scanf("%s", sendbuf[i]);
+		
 	}
 	return 0;
 }
 
-int set_server(int *sock, struct sockaddr_in *server,int index) {
+int set_server(int *sock, struct sockaddr_in *server,int serverindex) {
 	*sock = socket(AF_INET, SOCK_STREAM, 0);
 	if(*sock == -1)
 	{
 		printf("Could not create socket");
 	}
-	printf("Socket%d created\n",index+1);
-	char pch = serverIp[index];
-	pch = strtok(serverIp[index], ":");
-	*server.sin_addr.s_addr = inet_addr(pch);
-	*server.sin_family = AF_INET;
+	printf("Socket%d created\n", serverindex +1);
+	char pch = serverIp[serverindex];
+	pch = strtok(serverIp[serverindex], ":");
+	server->sin_addr.s_addr = inet_addr(pch);
+	server->sin_family = AF_INET;
 	pch = strtok(NULL, ":");
-	*server.sin_port = htons(pch);
+	server->sin_port = htons(atoi(pch));
 	if (connect(*sock, (struct sockaddr *)server, sizeof(*server)) < 0)
 	{
-		printf("connect server%d failed.\n",index+1);
+		printf("connect server%d failed.\n", serverindex +1);
 		return 0;
 	}
 
@@ -159,4 +160,7 @@ int set_config(char file[]) {
 	}
 	fclose(fp);
 	return 0;
+}
+
+//void *connection_handler(void *sockfd) {
 }

@@ -14,6 +14,7 @@
 #include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <dirent.h>
 
 #define BUFSIZE 4096
 #define QUESIZE 4// maximum number of client connections
@@ -44,7 +45,7 @@ int main(int argc, char * argv[])
 	puts("Socket created");
 	server.sin_family = AF_INET;
 	server.sin_addr.s_addr = INADDR_ANY;
-	server.sin_port = htons(argv[1]);
+	server.sin_port = htons(atoi(argv[1]));
 	if (bind(lsfd, (struct sockaddr *)&server, sizeof(server)) < 0) {
 		perror("Bind failed");
 		return 1;
@@ -89,10 +90,10 @@ void *connection_handler(void *sockfd) {
 		recv(clfd, readbuf, BUFSIZE, 0);
 		int i = 0;
 		int validUser[100];//mark matched username
-		for (i = 0; i < index; i++) {
+		for (i = 0; i < userindex; i++) {
 			validUser[i] = 0;
 		}
-		for (i = 0; i < index; i++) {
+		for (i = 0; i < userindex; i++) {
 			if (strcmp(username[i], readbuf)==0) {
 				validUser[i] = 1;
 			}
@@ -101,7 +102,7 @@ void *connection_handler(void *sockfd) {
 		//write(clfd, sendbuf, strlen(sendbuf));
 		int lastMathedUserIndex = 0;
 		recv(clfd, readbuf, BUFSIZE, 0);
-		for (i = 0; i < index; i++) {
+		for (i = 0; i < userindex; i++) {
 			if (validUser[i] == 1) {
 				if (strcmp(readbuf, password[i]) == 0) {
 					login = 1;
@@ -164,7 +165,7 @@ void *connection_handler(void *sockfd) {
 			strcat(filename, pch);
 			int filensize = 0;
 			pch = strtok(NULL, " ");
-			File* fd;
+			FILE* fd;
 			fd = fopen(filename, "r");
 			int n = 0;
 			if (fd)
@@ -182,12 +183,12 @@ void *connection_handler(void *sockfd) {
 			DIR *dp;
 			struct dirent *dir;
 			dp = opendir(filepath);
-			if (d) {
-				while ((dir = readdir(d)) != NULL) {
+			if (dp) {
+				while ((dir = readdir(dp)) != NULL) {
 					sprint(sendbuf, "%s\n", dir->d_name);
 					write(clfd, sendbuf, strlen(sendbuf));
 				}
-				closedir(d);
+				closedir(dp);
 			}
 		}
 	}

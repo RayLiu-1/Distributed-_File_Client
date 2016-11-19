@@ -21,7 +21,8 @@ char DocumentRoot[200] = "./";
 char username[100][16];
 char password[100][32];
 int userindex = 0;
-
+void *connection_handler(void *);
+int set_config();
 int main(int argc, char * argv[])
 {
 	struct timeval timeout;

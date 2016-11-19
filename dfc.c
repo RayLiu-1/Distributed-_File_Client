@@ -25,7 +25,7 @@ char username[16];
 char password[32];
 int userindex = 0;
 
-int set_server(int &sock, struct sockaddr_in &server, int index);
+int set_server(int *sock, struct sockaddr_in *server, int index);
 int set_config(char file[]);
 
 void encrypt(char content[], char password[], int len)
@@ -77,14 +77,13 @@ int main(int argc, char * argv[]) {
 	int connect[4];
 
 	for (int i = 0; i < 4; i++) {
-		connect[i] = set_server(sock[i], server[i], i);
+		connect[i] = set_server(&sock[i], &server[i], i);
 		if (connect[i] == 1) {
 			if (setsockopt(sock[i], SOL_SOCKET, SO_RCVTIMEO, (char *)&timeout,
 				sizeof(timeout)) < 0)
 				perror("setsockopt failed\n");
 		}
 	}
-	
 	while (1) {
 		puts("loging...");
 		for (int i = 0; i < 4; i++) {
@@ -106,20 +105,20 @@ int main(int argc, char * argv[]) {
 	}
 	return 0;
 }
-int set_server(int &sock, struct sockaddr_in &server,int index) {
-	sock = socket(AF_INET, SOCK_STREAM, 0);
-	f(sock == -1)
+int set_server(int *sock, struct sockaddr_in *server,int index) {
+	*sock = socket(AF_INET, SOCK_STREAM, 0);
+	f(*sock == -1)
 	{
 		printf("Could not create socket");
 	}
 	printf("Socket%d created\n",index+1);
 	char pch = serverIp[index];
 	pch = strtok(serverIp[index], ":");
-	server.sin_addr.s_addr = inet_addr(pch);
-	server.sin_family = AF_INET;
+	*server.sin_addr.s_addr = inet_addr(pch);
+	*server.sin_family = AF_INET;
 	pch = strtok(NULL, ":");
-	server.sin_port = htons(pch);
-	if (connect(sock, (struct sockaddr *)&server, sizeof(server)) < 0)
+	*server.sin_port = htons(pch);
+	if (connect(*sock, (struct sockaddr *)server, sizeof(*server)) < 0)
 	{
 		printf("connect server%d failed.\n",index+1);
 		return 0;

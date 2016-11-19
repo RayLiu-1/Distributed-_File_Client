@@ -17,7 +17,7 @@
 
 #define BUFSIZE 4096
 #define QUESIZE 4// maximum number of client connections
-char DocumentRoot[200] = "/";
+char DocumentRoot[200] = "./";
 char username[100][16];
 char password[100][32];
 int index = 0;
@@ -25,7 +25,6 @@ int index = 0;
 int main(int argc, char * argv[])
 {
 	struct timeval timeout;
-
 	if (argc < 2)
 	{
 		printf("USAGE:  <directory> <server_port>\n");
@@ -38,7 +37,9 @@ int main(int argc, char * argv[])
 	if (lsfd == -1) {
 		perror("Create sock failed");
 		return 1;
-	}
+	}	
+	int rec = set_config();
+
 	puts("Socket created");
 	server.sin_family = AF_INET;
 	server.sin_addr.s_addr = INADDR_ANY;
@@ -82,38 +83,50 @@ void *connection_handler(void *sockfd) {
 	int login = 0;
 	while (login == 0)
 	{
-		sendbuf = "Please enter your username: ";
-		write(clfd, sendbuf, strlen(sendbuf));
+		//sendbuf = "Please enter your username: ";
+		//write(clfd, sendbuf, strlen(sendbuf));
 		recv(clfd, readbuf, BUFSIZE, 0);
 		int i = 0;
+		int validUser[100];//mark matched username
+		for (i = 0; i < index; i++) {
+			validUser[i] = 0;
+		}
 		for (i = 0; i < index; i++) {
 			if (strcmp(username[i], readbuf)==0) {
-				strcat(filepath,"//")
-				strcat(filepath, username[i]);
-				break;
+				username[i] = 1;
 			}
 		}
-		sendbuf = "Please enter your password: ";
-		write(clfd, sendbuf, strlen(sendbuf));
+		//sendbuf = "Please enter your password: ";
+		//write(clfd, sendbuf, strlen(sendbuf));
+		int lastMathedUserIndex = 0;
 		recv(clfd, readbuf, BUFSIZE, 0);
-		if (i == index||strcmp(readbuf,password[i])!=0) {
-			sendbuf = "Invalid Username/Password. Please try again.\n";
+		for (i = 0; i < index; i++) {
+			if (validUser[i] == 1) {
+				if (strcmp(readbuf, password[i]) == 0) {
+					login = 1;
+					lastMathedUserIndex = i;
+				}
+			}
+		}
+		if (login==0) {
+			sendbuf = "Invalid Username/Password. \n";
 			write(clfd, sendbuf, strlen(sendbuf));
-			continue;
+			break;
 		}
 		else {
-			login == 1;
+			strcat(filepath, "//");
+			strcat(filepath, username[lastMathedUserIndex]);
+			sendbuf = "logged";
+			write(clfd, sendbuf, strlen(sendbuf));
 		}
 	}
 	while(login == 1) {
 		read_size = recv(clfd, readbuf, BUFSIZE, 0);
-		char *pch = readbuf;
-		if (read_size == -1) {
-			puts("timeout");
-		}
 		if (read_size <= 0) {
+			puts("disconnected");
 			break;
 		}
+		char *pch = readbuf;
 		pch = strtok(readbuf, " ");
 		if(strlen(pch)!=0 && strcmp(pch,"PUT")){
 			char filename[200];
@@ -122,6 +135,14 @@ void *connection_handler(void *sockfd) {
 			strcat(filename, "//");
 			pch = strtok(NULL, " ");
 			strcat(filename, pch);
+			pch = strtok(NULL, " ");
+			char subdir[200];
+			strcpy(subdir, pch);
+			if (strlen(subdir) != 0 && subdir[strlen(subdir) - 1] == '/')
+			{
+				strcat(filename, subdir);
+				strcat(filename, "/");
+			}
 			File* fd;
 			fd = fopen(filename, "w");
 			if (!fd)
@@ -150,9 +171,22 @@ void *connection_handler(void *sockfd) {
 				{
 					write(clfd, sendbuf, n);
 				}
+				fclose(fd);
 			}
-			write(clfd, senbuf, 0);
-			fclose(fd);
+			write(clfd, sendbuf, 0);
+			
+		}
+		else if (strlen(pch) != 0 && strcmp(pch, "LIST")) {
+			DIR *dp;
+			struct dirent *dir;
+			d = opendir(filepath);
+			if (d) {
+				while ((dir = readdir(d)) != NULL) {
+					sprint(sendbuf, "%s\n", dir->d_name);
+					write(clfd, sendbuf, strlen(sendbuf));
+				}
+				closedir(d)
+			}
 		}
 	}
 	if(read_size==0)

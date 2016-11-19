@@ -114,7 +114,7 @@ int set_server(int *sock, struct sockaddr_in *server,int serverindex) {
 		printf("Could not create socket");
 	}
 	printf("Socket%d created\n", serverindex +1);
-	char pch = serverIp[serverindex];
+	char * pch = serverIp[serverindex];
 	pch = strtok(serverIp[serverindex], ":");
 	server->sin_addr.s_addr = inet_addr(pch);
 	server->sin_family = AF_INET;
@@ -162,5 +162,4 @@ int set_config(char file[]) {
 	return 0;
 }
 
-//void *connection_handler(void *sockfd) {
-}
+//void *connection_handler(void *sockfd) {}

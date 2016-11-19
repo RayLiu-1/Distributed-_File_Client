@@ -90,7 +90,7 @@ int main(int argc, char * argv[]) {
 			if (connect[i] == 1) {
 				write(sock[i], username, strlen(username));
 				write(sock[i], password, strlen(username));
-				int n = recv(sock[i], readbuf, BUFSIZE, 0);
+				int n = recv(sock[i], readbuf[i], BUFSIZE, 0);
 				if (n = -1) {
 					connect[i] == 0;
 					puts("server%d disconnected");
@@ -98,16 +98,17 @@ int main(int argc, char * argv[]) {
 				}
 				//if(strcpy())
 			}
+			
 		}
 		//printf(Please enter command : );
-		
-		scanf("%s", sendbuf);
+		scanf("%s", sendbuf[i]);
 	}
 	return 0;
 }
+
 int set_server(int *sock, struct sockaddr_in *server,int index) {
 	*sock = socket(AF_INET, SOCK_STREAM, 0);
-	f(*sock == -1)
+	if(*sock == -1)
 	{
 		printf("Could not create socket");
 	}

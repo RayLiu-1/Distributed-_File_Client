@@ -5,6 +5,7 @@
 #include <sys/wait.h>
 #include <sys/errno.h>
 #include <netinet/in.h>
+#include <arpa/inet.h>
 #include <netdb.h>
 #include <pthread.h>
 #include <stdarg.h>
@@ -126,7 +127,7 @@ int set_server(int *sock, struct sockaddr_in *server,int serverindex) {
 		return 0;
 	}
 
-	printf("Connected Server%d\n",index+1);
+	printf("Connected Server%d\n",serverindex+1);
 	return 1;
 }
 

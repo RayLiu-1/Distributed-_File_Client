@@ -210,9 +210,9 @@ int set_config()
 	while (fgets(readBuf, BUFSIZE, (FILE*)fp))
 	{
 		char * pch;
-		pch = strstok(readBuf, " ");
+		pch = strtok(readBuf, " ");
 		strcpy(username[userindex], pch);
-		pch = strstok(NULL, "");
+		pch = strtok(NULL, "");
 		strcpy(password[userindex++], pch);
 	}
 	fclose(fp);

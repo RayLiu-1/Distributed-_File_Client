@@ -20,7 +20,7 @@
 char DocumentRoot[200] = "./";
 char username[100][16];
 char password[100][32];
-int index = 0;
+int userindex = 0;
 
 int main(int argc, char * argv[])
 {
@@ -93,7 +93,7 @@ void *connection_handler(void *sockfd) {
 		}
 		for (i = 0; i < index; i++) {
 			if (strcmp(username[i], readbuf)==0) {
-				username[i] = 1;
+				validUser[i] = 1;
 			}
 		}
 		//sendbuf = "Please enter your password: ";
@@ -109,14 +109,14 @@ void *connection_handler(void *sockfd) {
 			}
 		}
 		if (login==0) {
-			sendbuf = "Invalid Username/Password. \n";
+			strcpy(sendbuf,"Invalid Username/Password. \n");
 			write(clfd, sendbuf, strlen(sendbuf));
 			break;
 		}
 		else {
 			strcat(filepath, "//");
 			strcat(filepath, username[lastMathedUserIndex]);
-			sendbuf = "logged";
+			strcpy(sendbuf,"logged");
 			write(clfd, sendbuf, strlen(sendbuf));
 		}
 	}
@@ -165,6 +165,7 @@ void *connection_handler(void *sockfd) {
 			pch = strtok(NULL, " ");
 			File* fd;
 			fd = fopen(filename, "r");
+			int n = 0;
 			if (fd)
 			{
 				while ((n=fread(sendbuf,sizeof(char),BUFSIZE, (FILE *)fd))>0)
@@ -179,13 +180,13 @@ void *connection_handler(void *sockfd) {
 		else if (strlen(pch) != 0 && strcmp(pch, "LIST")) {
 			DIR *dp;
 			struct dirent *dir;
-			d = opendir(filepath);
+			dp = opendir(filepath);
 			if (d) {
 				while ((dir = readdir(d)) != NULL) {
 					sprint(sendbuf, "%s\n", dir->d_name);
 					write(clfd, sendbuf, strlen(sendbuf));
 				}
-				closedir(d)
+				closedir(d);
 			}
 		}
 	}
@@ -210,9 +211,9 @@ int set_config()
 	{
 		char * pch;
 		pch = strstok(readBuf, " ");
-		strcpy(username[index], pch);
+		strcpy(username[userindex], pch);
 		pch = strstok(NULL, "");
-		strcpy(password[index++], pch);
+		strcpy(password[userindex++], pch);
 	}
 	fclose(fp);
 	return 0;

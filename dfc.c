@@ -23,7 +23,10 @@ char server[4][100];
 char serverIp[4][100];
 char username[16];
 char password[32];
-int index = 0;
+int userindex = 0;
+
+int set_server(int &sock, struct sockaddr_in &server, int index);
+int set_config(char file[]);
 
 void encrypt(char content[], char password[], int len)
 {
@@ -62,7 +65,7 @@ int main(int argc, char * argv[]) {
 		exit(1);
 	}
 	char file[200];
-	strspy(file, argv[0]);
+	strcpy(file, argv[0]);
 	set_config(file);
 	struct timeval timeout;
 	timeout.tv_sec = 10;
@@ -72,16 +75,13 @@ int main(int argc, char * argv[]) {
 	char readbuf[4][BUFSIZE];
 	char sendbuf[4][BUFSIZE];
 	int connect[4];
-	struct timeval timeout;
-	timeout.tv_sec = 10;
-	timeout.tv_usec = 0;
 
 	for (int i = 0; i < 4; i++) {
 		connect[i] = set_server(sock[i], server[i], i);
 		if (connect[i] == 1) {
 			if (setsockopt(sock[i], SOL_SOCKET, SO_RCVTIMEO, (char *)&timeout,
 				sizeof(timeout)) < 0)
-				error("setsockopt failed\n");
+				perror("setsockopt failed\n");
 		}
 	}
 	
@@ -95,12 +95,12 @@ int main(int argc, char * argv[]) {
 				if (n = -1) {
 					connect[i] == 0;
 					puts("server%d disconnected");
-					close(sock[i])
+					close(sock[i]);
 				}
-				if(strcpy())
+				//if(strcpy())
 			}
 		}
-		printf(Please enter command : );
+		//printf(Please enter command : );
 		
 		scanf("%s", sendbuf);
 	}
@@ -137,23 +137,23 @@ int set_config(char file[]) {
 		return 1;
 	}
 	char readBuf[BUFSIZE];
-	index = 0;
+	userindex = 0;
 	while (fgets(readBuf, BUFSIZE, (FILE*)fp))
 	{
 		char * pch;
-		pch = strstok(readBuf, " ");
+		pch = strtok(readBuf, " ");
 		if (strcmp(pch, "server")) {
-			pch = strstok(NULL, " ");
-			strcpy(server[index], pch);
-			pch = strstok(NULL, "");
-			strcpy(serverIp[index++], pch);
+			pch = strtok(NULL, " ");
+			strcpy(server[userindex], pch);
+			pch = strtok(NULL, "");
+			strcpy(serverIp[userindex++], pch);
 		}
 		else if (strcmp(pch, "Username:")) {
-			pch = strstok(NULL, " ");
+			pch = strtok(NULL, " ");
 			strcpy(username, pch);
 		}
 		else if (strcmp(pch, "Password:")) {
-			pch = strstok(NULL, " ");
+			pch = strtok(NULL, " ");
 			strcpy(password, pch);
 		}
 	}

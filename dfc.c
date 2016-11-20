@@ -96,7 +96,7 @@ int main(int argc, char * argv[]) {
 				close(sock[i]);
 			}
 			if (n > 0) {
-				puts(readbuf);
+				puts(readbuf[i]);
 			}
 		}
 	}

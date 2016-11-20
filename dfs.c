@@ -105,9 +105,11 @@ void *connection_handler(void *sockfd) {
 		//write(clfd, sendbuf, strlen(sendbuf));
 		int lastMathedUserIndex = 0;
 		n = recv(clfd, readbuf, BUFSIZE, 0);
+
 		for (i = 0; i < userindex; i++) {
 			if (validUser[i] == 1) {
 				//puts();
+				puts(password[i]);
 				if (strcmp(readbuf, password[i]) == 0) {
 					login = 1;
 					lastMathedUserIndex = i;
@@ -134,7 +136,7 @@ void *connection_handler(void *sockfd) {
 		}
 		char *pch = readbuf;
 		pch = strtok(readbuf, " ");
-		if(strlen(pch)!=0 && strcmp(pch,"PUT")){
+		if(strlen(pch)!=0 && strcmp(pch,"PUT")==0){
 			char filename[200];
 			memset(filename, 0, sizeof(filename));
 			strcpy(filename, filepath);
@@ -159,7 +161,7 @@ void *connection_handler(void *sockfd) {
 			}
 			fclose(fd);
 		}
-		else if (strlen(pch) != 0 && strcmp(pch, "GET")) {
+		else if (strlen(pch) != 0 && strcmp(pch, "GET")==0) {
 			char filename[200];
 			memset(filename, 0, sizeof(filename));
 			strcpy(filename, filepath);
@@ -181,7 +183,7 @@ void *connection_handler(void *sockfd) {
 			write(clfd, sendbuf, 0);
 			
 		}
-		else if (strlen(pch) != 0 && strcmp(pch, "LIST")) {
+		else if (strlen(pch) != 0 && strcmp(pch, "LIST")==0) {
 			DIR *dp;
 			struct dirent *dir;
 			dp = opendir(filepath);

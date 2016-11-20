@@ -115,7 +115,7 @@ int main(int argc, char * argv[]) {
 			char commond[BUFSIZE];
 			fgets(commond, BUFSIZE, stdin);
 			puts(commond);
-			if ((strncmp(commond, "LIST ",5) == 0)||(strcmp(commond,"LIST")==0)) {
+			if ((strncmp(commond, "LIST ",5) == 0)||(strcmp(commond,"LIST\n")==0)) {
 				for (int i = 0; i < 4; i++)
 				{	
 					if (connect[i] == 1)

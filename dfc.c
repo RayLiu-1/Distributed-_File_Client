@@ -61,14 +61,14 @@ void decrypt(char content[], char password[], int lenth)
 }
 
 int main(int argc, char * argv[]) {
-	if (argc <1)
+	if (argc <2)
 	{
 		perror("USAGE:  <config file>\n");
 		exit(1);
 	}
 
 	char file[200];
-	strcpy(file, argv[0]);
+	strcpy(file, argv[1]);
 	set_config(file);
 	while (getchar() != '\n');
 

@@ -192,6 +192,7 @@ void *connection_handler(void *sockfd) {
 					sprintf(sendbuf, "%s\n", dir->d_name);
 					write(clfd, sendbuf, strlen(sendbuf));
 				}
+				write(clfd, sendbuf, 0);
 				closedir(dp);
 			}
 		}

@@ -119,7 +119,7 @@ int main(int argc, char * argv[]) {
 				int filemark[200];
 				int filesize = 0;
 				for (int i = 0; i < 200; i++) {
-					filemark = 0;
+					filemark[i] = 0;
 				}
 				for (int i = 0; i < 4; i++)
 				{	
@@ -129,13 +129,13 @@ int main(int argc, char * argv[]) {
 				for (int i = 0; i < 4; i++) {
 					if (connect[i] == 1) {
 						while (read_size = recv(sock[i], readbuf[i], BUFSIZE, 0)>0) {
-							if (strlen(readbuf[i])>4 && readbuf[2]=='.'&&readbuf[0] == '.' && (readbuf[1] == '1' || readbuf[1] == '2' || readbuf[1] == '3' || readbuf[1] == '4')) {
+							if (strlen(readbuf[i])>4 && readbuf[i][2]=='.'&&readbuf[i][0] == '.' && (readbuf[i][1] == '1' || readbuf[i][1] == '2' || readbuf[i][1] == '3' || readbuf[i][1] == '4')) {
 								int find = 0;
 								for (int i = 0; i < filesize; i++) {
 									if (strcmp(readbuf[i] + 3, filelist[i])==0) {
-										int part = atoi(readbuf[i][1]);
-										int bitpart = 1 << (part - 1);
-										filemark |= bitpart;
+										int part = readbuf[i][1]-'1';
+										int bitpart = 1 << part;
+										filemark[i] |= bitpart;
 										find = 1;
 									}
 								}

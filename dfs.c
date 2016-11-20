@@ -187,7 +187,7 @@ void *connection_handler(void *sockfd) {
 			dp = opendir(filepath);
 			if (dp) {
 				while ((dir = readdir(dp)) != NULL ) {
-					if (strcmp(dir->d_name, ".." )!= 0 && strcmp(dir->d_name, "." != 0))
+					if (strcmp(dir->d_name, ".." )!= 0 && strcmp(dir->d_name,".") != 0)
 					{
 						puts(dir->d_name);
 						write(clfd, dir->d_name, 256);

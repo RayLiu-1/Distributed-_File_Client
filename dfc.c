@@ -123,10 +123,13 @@ int main(int argc, char * argv[]) {
 				for (int i = 0; i < 4; i++) {
 					if (connect[i] == 1) {
 						while (read_size = recv(sock[i], readbuf[i], BUFSIZE, 0)>0) {
-							printf("%d\n", i);
+							puts(readbuf);
 						}
-						if (read_size <= 0) {
-							printf("%d000\n", read_size);
+						if (read_size == -1) {
+							connect[i] = 0;
+							printf("server%d disconnected\n", i + 1);
+							close(sock[i]);
+							continue;
 						}
 					}
 				}

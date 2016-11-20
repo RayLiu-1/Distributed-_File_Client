@@ -133,8 +133,9 @@ int main(int argc, char * argv[]) {
 								int find = 0;
 								puts(readbuf[i]);
 								for (int j = 0; j < filesize; j++) {
-									if (strcmp(readbuf[j] + 3, filelist[j])==0) {
-										int part = readbuf[j][1]-'1';
+									if (strcmp(readbuf[i] + 3, filelist[j])==0) {
+										puts(readbuf[i]);
+										int part = readbuf[i][1]-'1';
 										int bitpart = 1 << part;
 										filemark[j] |= bitpart;
 										find = 1;

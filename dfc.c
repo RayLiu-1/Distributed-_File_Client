@@ -131,10 +131,8 @@ int main(int argc, char * argv[]) {
 						while (read_size = recv(sock[i], readbuf[i], BUFSIZE, 0)>0) {
 							if (strlen(readbuf[i])>4 && readbuf[i][2]=='.'&&readbuf[i][0] == '.' && (readbuf[i][1] == '1' || readbuf[i][1] == '2' || readbuf[i][1] == '3' || readbuf[i][1] == '4')) {
 								int find = 0;
-								puts(readbuf[i]);
 								for (int j = 0; j < filesize; j++) {
 									if (strcmp(readbuf[i] + 3, filelist[j])==0) {
-										puts(readbuf[i]);
 										int part = readbuf[i][1]-'1';
 										int bitpart = 1 << part;
 										filemark[j] |= bitpart;
@@ -143,6 +141,9 @@ int main(int argc, char * argv[]) {
 								}
 								if (find == 0) {
 									strcpy(filelist[filesize++], readbuf[i] + 3);
+									int part = readbuf[i][1] - '1';
+									int bitpart = 1 << part;
+									filemark[j] |= bitpart;
 								}
 							}
 						}if (read_size == -1) {
@@ -158,7 +159,7 @@ int main(int argc, char * argv[]) {
 						puts(filelist[i]);
 					else
 					{
-						printf("%d[incomplete]\n", filemark[i]);
+						printf("%s[incomplete]\n", filelist[i]);
 					}
 				}
 

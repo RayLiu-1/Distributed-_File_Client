@@ -190,7 +190,7 @@ void *connection_handler(void *sockfd) {
 			if (dp) {
 				while ((dir = readdir(dp)) != NULL ) {
 					sprintf(sendbuf, "%s", dir->d_name);
-					write(clfd, sendbuf, strlen(sendbuf));
+					write(clfd, sendbuf, strlen(sendbuf)+1);
 					puts(sendbuf);
 				}
 				write(clfd, sendbuf, 0);

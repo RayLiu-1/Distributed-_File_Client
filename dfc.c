@@ -68,7 +68,7 @@ int main(int argc, char * argv[]) {
 	}
 	set_config(argv[1]);
 	struct timeval timeout;
-	timeout.tv_sec = 10;
+	timeout.tv_sec = 1;
 	timeout.tv_usec = 0;
 	int sock[4];
 	struct sockaddr_in server[4];
@@ -84,23 +84,30 @@ int main(int argc, char * argv[]) {
 				perror("setsockopt failed\n");
 		}
 	}
-	while (1) {
-		puts("loging...");
-		for (int i = 0; i < 4; i++) {
-			if (connect[i] == 1) {
-				write(sock[i], username, strlen(username));
-				write(sock[i], password, strlen(username));
-				int n = recv(sock[i], readbuf[i], BUFSIZE, 0);
-				if (n = -1) {
-					connect[i] == 0;
-					printf("server%d disconnected",i);
-					close(sock[i]);
-				}
-				//if(strcpy())
+	puts("loging...");
+	for (int i = 0; i < 4; i++) {
+		if (connect[i] == 1) {
+			write(sock[i], username, strlen(username));
+			write(sock[i], password, strlen(username));
+			int n = recv(sock[i], readbuf[i], BUFSIZE, 0);
+			if (n = -1) {
+				connect[i] == 0;
+				printf("server%d disconnected",i+1);
+				close(sock[i]);
 			}
-			scanf("%s", sendbuf[i]);
 		}
-		//printf(Please enter command : );
+	}
+	while (1) {
+		for (int i = 0; i < 4; i++)
+		{
+			scanf("%s", sendbuf[i]);
+			printf(Please enter command : );
+			int n = 0;
+			while (n = recv(sock[i], readbuf[i], BUFSIZE, 0)>0)
+			{
+				puts(readbuf[i]);
+			}
+		}
 		
 	}
 	return 0;

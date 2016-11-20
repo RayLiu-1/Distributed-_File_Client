@@ -189,7 +189,7 @@ void *connection_handler(void *sockfd) {
 				puts("111");
 				while ((dir = readdir(dp)) != NULL ) {
 					puts( dir->d_name);
-					write(clfd, dir->d_name, strlen(dir->d_name)+1);
+					write(clfd, dir->d_name, 256);
 				}
 				
 				closedir(dp);

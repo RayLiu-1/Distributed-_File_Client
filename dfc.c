@@ -125,7 +125,7 @@ int main(int argc, char * argv[]) {
 						while (read_size = recv(sock[i], readbuf[i], BUFSIZE, 0)>0) {
 							printf("%d\n", read_size);
 						}
-						if (read_size = -1) {
+						if (read_size = 0) {
 							pits("ppp");
 						}
 					}

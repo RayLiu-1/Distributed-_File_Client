@@ -96,10 +96,8 @@ void *connection_handler(void *sockfd) {
 		}
 		write(clfd, readbuf, strlen(readbuf));
 		for (i = 0; i < userindex; i++) {
-			puts(username[i]);
 			if (strcmp(username[i], readbuf)==0) {
 				validUser[i] = 1;
-				puts(password[i]);
 			}
 		}
 		//sendbuf = "Please enter your password: ";
@@ -110,7 +108,6 @@ void *connection_handler(void *sockfd) {
 		for (i = 0; i < userindex; i++) {
 			if (validUser[i] == 1) {
 				//puts();
-				puts(password[i]);
 				if (strcmp(readbuf, password[i]) == 0) {
 					login = 1;
 					lastMathedUserIndex = i;

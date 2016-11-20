@@ -88,9 +88,15 @@ int main(int argc, char * argv[]) {
 	for (int i = 0; i < 4; i++) {
 		if (connect[i] == 1) {
 			write(sock[i], username, strlen(username));
-			//puts(username);
 			int n = recv(sock[i], readbuf[i], BUFSIZE, 0);
-			puts(readbuf[i]);
+			if (n == -1) {
+				connect[i] = 0;
+				printf("server%d disconnected\n", i + 1);
+				close(sock[i]);
+				continue;
+			}
+			write(sock[i], password, strlen(password));
+			n = recv(sock[i], readbuf[i], BUFSIZE, 0);
 			if (n == -1) {
 				connect[i] = 0;
 				printf("server%d disconnected\n", i + 1);
@@ -98,33 +104,40 @@ int main(int argc, char * argv[]) {
 				continue;
 			}
 
-			write(sock[i], password, strlen(password));
-			n = recv(sock[i], readbuf[i], BUFSIZE, 0);
-			if (n == -1) {
-				connect[i] = 0;
-				printf("server%d disconnected\n",i+1);
-				close(sock[i]);
-				continue;
-			}
-			if (n > 0) {
-				puts(readbuf[i]);
-			}
 		}
 	}
-	while (1) {
-		for (int i = 0; i < 4; i++)
-		{
-			scanf("%s", sendbuf[i]);
+	if (connect[0]||connect[1]||connect[2]||connect[3])
+	{
+		puts("logged");	
+		while (1) {
+			int read_size = 0;
 			printf("Please enter command: ");
-			int n = 0;
-			while (n = recv(sock[i], readbuf[i], BUFSIZE, 0)>0)
-			{
-				puts(readbuf[i]);
+			scanf("%s", readbuf[i]);
+			strcpy(sendbuf, readbuf);
+			char pch = sendbuf[i]
+			if (strcmp(sendbuf, "LIST") == 0) {
+				for (int i = 0; i < 4; i++)
+				{	
+					if (connect[i] == 1)
+						write(sock[i], sendbuf, strlen(sendbuf));
+				}
+				for (int i = 0; i < 4; i++) {
+					if (connect[i] == 1) {
+						while (read_size = recv(sock[i], readbuf[i], BUFSIZE, 0)) {
+							puts(readbuf);
+						}
+					}
+				}
 			}
-		}
-		
+			
 	}
 	return 0;
+		
+	}
+	else {
+		puts("Wrong username//pasword");
+	}
+
 }
 
 int set_server(int *sock, struct sockaddr_in *server,int serverindex) {

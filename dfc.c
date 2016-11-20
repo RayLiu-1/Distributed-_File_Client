@@ -124,6 +124,7 @@ int main(int argc, char * argv[]) {
 					if (connect[i] == 1) {
 						strcpy(readbuf[i] , "");
 						while ((read_size = recv(sock[i], readbuf[i], BUFSIZE, 0))>0) {
+							
 							printf(readbuf[i]);
 						}
 					}

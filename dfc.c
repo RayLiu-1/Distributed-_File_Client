@@ -114,7 +114,7 @@ int main(int argc, char * argv[]) {
 			printf("Please enter command: ");
 			char commond[BUFSIZE];
 			fgets(commond, BUFSIZE, stdin);
-			if (strcmp(commond, "LIST ",5) == 0) {
+			if (strncmp(commond, "LIST ",5) == 0) {
 				for (int i = 0; i < 4; i++)
 				{	
 					if (connect[i] == 1)
@@ -123,7 +123,7 @@ int main(int argc, char * argv[]) {
 				for (int i = 0; i < 4; i++) {
 					if (connect[i] == 1) {
 						while (read_size = recv(sock[i], readbuf[i], BUFSIZE, 0)) {
-							puts(readbuf);
+							puts(readbuf[i]);
 						}
 					}
 				}

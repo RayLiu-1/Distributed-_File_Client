@@ -115,6 +115,12 @@ int main(int argc, char * argv[]) {
 			char commond[BUFSIZE];
 			fgets(commond, BUFSIZE, stdin);
 			if ((strncmp(commond, "LIST ",5) == 0)||(strcmp(commond,"LIST\n")==0)) {
+				char filelist[200][256];
+				int filemark[200];
+				int filesize = 0;
+				for (int i = 0; i < 200; i++) {
+					filemark = 0;
+				}
 				for (int i = 0; i < 4; i++)
 				{	
 					if (connect[i] == 1)
@@ -123,7 +129,20 @@ int main(int argc, char * argv[]) {
 				for (int i = 0; i < 4; i++) {
 					if (connect[i] == 1) {
 						while (read_size = recv(sock[i], readbuf[i], BUFSIZE, 0)>0) {
-							puts(readbuf[i]);
+							if (strlen(readbuf[i])>4 && readbuf[2]=='.'&&readbuf[0] == '.' && (readbuf[1] == '1' || readbuf[1] == '2' || readbuf[1] == '3' || readbuf[1] == '4')) {
+								int find = 0;
+								for (int i = 0; i < filesize; i++) {
+									if (strcmp(readbuf[i] + 3, filelist[i])==0) {
+										int part = atoi(readbuf[i][1]);
+										int bitpart = 1 << (part - 1);
+										filemark |= bitpart;
+										find = 1;
+									}
+								}
+								if (find == 0) {
+									strcpy(filelist[filesize++], readbuf[i] + 3);
+								}
+							}
 						}
 						if (read_size == -1) {
 							connect[i] = 0;
@@ -133,6 +152,13 @@ int main(int argc, char * argv[]) {
 						}
 					}
 				}
+				for (int i = 0; i < filesize; i++) {
+					if ((filemark[i] & 15) == 15)
+						puts(filelist[i]);
+					else
+						printf("%s[incomplete]\n");
+				}
+
 			}
 			
 	}

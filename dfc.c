@@ -66,11 +66,12 @@ int main(int argc, char * argv[]) {
 		perror("USAGE:  <config file>\n");
 		exit(1);
 	}
-	while (getchar() != '\n');
 
 	char file[200];
 	strcpy(file, argv[0]);
 	set_config(file);
+	while (getchar() != '\n');
+
 	struct timeval timeout;
 	timeout.tv_sec = 10;
 	timeout.tv_usec = 0;

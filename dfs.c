@@ -182,6 +182,7 @@ void *connection_handler(void *sockfd) {
 			
 		}
 		else if (strlen(pch) != 0 && strcmp(pch, "LIST")==0) {
+			puts("list");
 			DIR *dp;
 			struct dirent *dir;
 			dp = opendir(filepath);

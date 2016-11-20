@@ -186,10 +186,12 @@ void *connection_handler(void *sockfd) {
 			struct dirent *dir;
 			dp = opendir(filepath);
 			if (dp) {
-				puts("111");
 				while ((dir = readdir(dp)) != NULL ) {
-					puts( dir->d_name);
-					write(clfd, dir->d_name, 256);
+					if (strcmp(dir->d_name, ".." != 0 && strcmp(dir->d_name, "." != 0)))
+					{
+						puts(dir->d_name);
+						write(clfd, dir->d_name, 256);
+					}
 				}
 				
 				closedir(dp);

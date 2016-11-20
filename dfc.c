@@ -126,7 +126,7 @@ int main(int argc, char * argv[]) {
 							printf("%d\n", i);
 						}
 						if (read_size <= 0) {
-							printf("%d\n", read_size);
+							printf("%d000\n", read_size);
 						}
 					}
 				}

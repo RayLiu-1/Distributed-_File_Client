@@ -198,7 +198,7 @@ void *connection_handler(void *sockfd) {
 	}
 	if(read_size==0)
 		puts("Disconnected");
-	fflush(stdout);
+	fflush(stdout); 
 	free(sockfd);
 	pthread_exit(0);
 }

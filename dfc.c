@@ -147,7 +147,7 @@ int set_config(char* file) {
 		if (strcmp(pch, "server")) {
 			pch = strtok(NULL, " ");
 			strcpy(server[userindex], pch);
-			pch = strtok(NULL, "");
+			pch = strtok(NULL, ":");
 			strcpy(serverIp[userindex++], pch);
 		}
 		else if (strcmp(pch, "Username:")) {

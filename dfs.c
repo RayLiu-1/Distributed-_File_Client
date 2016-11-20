@@ -123,8 +123,7 @@ void *connection_handler(void *sockfd) {
 			strcat(filepath, "/");
 			strcat(filepath, username[lastMathedUserIndex]);
 			strcpy(sendbuf,"logged");
-			printf("%s%s",DocumentRoot,"logged");
-			write(clfd, sendbuf, strlen(sendbuf));
+			write(clfd, sendbuf, strlen(sendbuf)+1);
 		}
 	}
 	while(login == 1) {

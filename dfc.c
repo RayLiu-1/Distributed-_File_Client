@@ -123,9 +123,11 @@ int main(int argc, char * argv[]) {
 				for (int i = 0; i < 4; i++) {
 					if (connect[i] == 1) {
 						strcpy(readbuf[i] , "");
-						while ((read_size = recv(sock[i], readbuf[i], BUFSIZE, 0))>0) {
+						read_size = recv(sock[i], readbuf[i], BUFSIZE, 0);
+						while (read_size>0) {
+							printf("%dstring:%s",read_size,readbuf[i]);
+							read_size = recv(sock[i], readbuf[i], BUFSIZE, 0);
 							
-							printf("%d%s",read_size,readbuf[i]);
 						}
 					}
 				}

@@ -66,6 +66,8 @@ int main(int argc, char * argv[]) {
 		perror("USAGE:  <config file>\n");
 		exit(1);
 	}
+	while (getchar() != '\n');
+
 	char file[200];
 	strcpy(file, argv[0]);
 	set_config(file);
@@ -120,7 +122,6 @@ int set_server(int *sock, struct sockaddr_in *server,int serverindex) {
 	server->sin_addr.s_addr = inet_addr(pch);
 	server->sin_family = AF_INET;
 	pch = strtok(NULL, ":");
-	while (getchar() != '\n');
 	server->sin_port = htons(atoi(pch));
 	if (connect(*sock, (struct sockaddr *)server, sizeof(*server)) < 0)
 	{

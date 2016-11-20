@@ -119,6 +119,7 @@ void *connection_handler(void *sockfd) {
 			strcat(filepath, "//");
 			strcat(filepath, username[lastMathedUserIndex]);
 			strcpy(sendbuf,"logged");
+			puts("logged");
 			write(clfd, sendbuf, strlen(sendbuf));
 		}
 	}

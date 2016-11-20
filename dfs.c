@@ -97,6 +97,7 @@ void *connection_handler(void *sockfd) {
 		}
 		write(clfd, readbuf, strlen(readbuf));
 		for (i = 0; i < userindex; i++) {
+			puts(username[i]);
 			if (strcmp(username[i], readbuf)==0) {
 				validUser[i] = 1;
 				puts(password[i]);

@@ -137,11 +137,11 @@ int set_config(char* file) {
 		perror("failed file opening");
 		return 1;
 	}
-	while (getchar() != '\n');
 	char readBuf[BUFSIZE];
 	userindex = 0;
 	while (fgets(readBuf, BUFSIZE, (FILE*)fp))
 	{
+		while (getchar() != '\n');
 		char * pch;
 		pch = strtok(readBuf, " ");
 		if (strcmp(pch, "server")) {

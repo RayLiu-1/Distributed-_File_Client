@@ -131,6 +131,7 @@ int main(int argc, char * argv[]) {
 						while (read_size = recv(sock[i], readbuf[i], BUFSIZE, 0)>0) {
 							if (strlen(readbuf[i])>4 && readbuf[i][2]=='.'&&readbuf[i][0] == '.' && (readbuf[i][1] == '1' || readbuf[i][1] == '2' || readbuf[i][1] == '3' || readbuf[i][1] == '4')) {
 								int find = 0;
+								puts(readbuf[i]);
 								for (int i = 0; i < filesize; i++) {
 									if (strcmp(readbuf[i] + 3, filelist[i])==0) {
 										int part = readbuf[i][1]-'1';

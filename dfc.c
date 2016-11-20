@@ -125,6 +125,7 @@ int main(int argc, char * argv[]) {
 					if (connect[i] == 1) {
 						while (read_size = recv(sock[i], readbuf[i], BUFSIZE, 0)) {
 							puts(readbuf[i]);
+							puts("9");
 						}
 					}
 				}

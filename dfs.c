@@ -89,7 +89,6 @@ void *connection_handler(void *sockfd) {
 		//sendbuf = "Please enter your username: ";
 		//write(clfd, sendbuf, strlen(sendbuf));
 		recv(clfd, readbuf, BUFSIZE, 0);
-		puts(readbuf);
 		int i = 0;
 		int validUser[100];//mark matched username
 		for (i = 0; i < userindex; i++) {
@@ -218,9 +217,9 @@ int set_config()
 	while (fgets(readBuf, BUFSIZE, (FILE*)fp))
 	{
 		char * pch;
-		pch = strtok(readBuf, " ");
+		pch = strtok(readBuf, " \n");
 		strcpy(username[userindex], pch);
-		pch = strtok(NULL, " ");
+		pch = strtok(NULL, " \n");
 		strcpy(password[userindex++], pch);
 	}
 	fclose(fp);

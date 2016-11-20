@@ -171,11 +171,11 @@ int set_config(char* file) {
 			strcpy(serverIp[userindex++], pch);
 		}
 		else if (strcmp(pch, "Username:")==0) {
-			pch = strtok(NULL, " ");
+			pch = strtok(NULL, " \n");
 			strcpy(username, pch);
 		}
 		else if (strcmp(pch, "Password:")==0) {
-			pch = strtok(NULL, " ");
+			pch = strtok(NULL, " \n");
 			strcpy(password, pch);
 		}
 	}

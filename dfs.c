@@ -132,6 +132,7 @@ void *connection_handler(void *sockfd) {
 			puts("disconnected");
 			break;
 		}
+		puts(readbuf);
 		char *pch = readbuf;
 		pch = strtok(readbuf, " ");
 		if(strlen(pch)!=0 && strcmp(pch,"PUT")==0){
@@ -182,7 +183,6 @@ void *connection_handler(void *sockfd) {
 			
 		}
 		else if (strlen(pch) != 0 && strcmp(pch, "LIST")==0) {
-			puts("list");
 			DIR *dp;
 			struct dirent *dir;
 			dp = opendir(filepath);

@@ -218,7 +218,7 @@ int set_config()
 		char * pch;
 		pch = strtok(readBuf, " ");
 		strcpy(username[userindex], pch);
-		pch = strtok(NULL, "");
+		pch = strtok(NULL, " ");
 		strcpy(password[userindex++], pch);
 	}
 	fclose(fp);

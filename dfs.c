@@ -193,10 +193,9 @@ void *connection_handler(void *sockfd) {
 						write(clfd, dir->d_name, 256);
 					}
 				}
-				
 				closedir(dp);
 			}
-			write(clfd, sendbuf, 0);
+			//write(clfd, sendbuf, 0);
 		}
 	}
 	if(read_size==0)

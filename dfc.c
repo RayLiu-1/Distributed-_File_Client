@@ -132,11 +132,11 @@ int main(int argc, char * argv[]) {
 							if (strlen(readbuf[i])>4 && readbuf[i][2]=='.'&&readbuf[i][0] == '.' && (readbuf[i][1] == '1' || readbuf[i][1] == '2' || readbuf[i][1] == '3' || readbuf[i][1] == '4')) {
 								int find = 0;
 								puts(readbuf[i]);
-								for (int i = 0; i < filesize; i++) {
-									if (strcmp(readbuf[i] + 3, filelist[i])==0) {
-										int part = readbuf[i][1]-'1';
+								for (int j = 0; j < filesize; j++) {
+									if (strcmp(readbuf[j] + 3, filelist[j])==0) {
+										int part = readbuf[j][1]-'1';
 										int bitpart = 1 << part;
-										filemark[i] |= bitpart;
+										filemark[j] |= bitpart;
 										find = 1;
 									}
 								}
@@ -144,8 +144,7 @@ int main(int argc, char * argv[]) {
 									strcpy(filelist[filesize++], readbuf[i] + 3);
 								}
 							}
-						}
-						if (read_size == -1) {
+						}if (read_size == -1) {
 							connect[i] = 0;
 							printf("server%d disconnected\n", i + 1);
 							close(sock[i]);

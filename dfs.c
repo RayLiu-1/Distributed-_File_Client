@@ -185,12 +185,11 @@ void *connection_handler(void *sockfd) {
 			DIR *dp;
 			struct dirent *dir;
 			dp = opendir(filepath);
+			puts(filepath);
 			if (dp) {
 				while ((dir = readdir(dp)) != NULL ) {
-					strcpy(sendbuf, "1");
 					sprintf(sendbuf, "%s\n", dir->d_name);
 					write(clfd, sendbuf, strlen(sendbuf));
-					puts(sendbuf);
 				}
 				closedir(dp);
 			}

@@ -32,7 +32,7 @@ int main(int argc, char * argv[])
 		printf("USAGE:  <directory> <server_port>\n");
 		exit(1);
 	}
-	strcat(DocumentRoot, argv[0]);
+	strcat(DocumentRoot, argv[1]);
 	int lsfd, cnfd, *sock;
 	struct sockaddr_in server, client;
 	lsfd = socket(AF_INET, SOCK_STREAM, 0);
@@ -45,7 +45,7 @@ int main(int argc, char * argv[])
 	puts("Socket created");
 	server.sin_family = AF_INET;
 	server.sin_addr.s_addr = INADDR_ANY;
-	server.sin_port = htons(atoi(argv[1]));
+	server.sin_port = htons(atoi(argv[2]));
 	if (bind(lsfd, (struct sockaddr *)&server, sizeof(server)) < 0) {
 		perror("Bind failed");
 		return 1;

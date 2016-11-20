@@ -132,7 +132,7 @@ int set_server(int *sock, struct sockaddr_in *server,int serverindex) {
 	return 1;
 }
 
-int set_config(char file[]) {
+int set_config(char* file) {
 	FILE *fp;
 	fp = fopen(file, "r");
 	if (fp == NULL) {

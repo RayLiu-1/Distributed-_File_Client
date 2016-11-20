@@ -82,12 +82,13 @@ void *connection_handler(void *sockfd) {
 	memset(readbuf, 0, BUFSIZE);
 	memset(sendbuf, 0, BUFSIZE);
 	char filepath[200];
+	int n = 0;
 	int login = 0;
 	if (login == 0)
 	{
 		//sendbuf = "Please enter your username: ";
 		//write(clfd, sendbuf, strlen(sendbuf));
-		recv(clfd, readbuf, BUFSIZE, 0);
+		recv(clfd, readbuf, BUFSIZE, 0)>0;
 		int i = 0;
 		int validUser[100];//mark matched username
 		for (i = 0; i < userindex; i++) {
@@ -102,7 +103,7 @@ void *connection_handler(void *sockfd) {
 		//sendbuf = "Please enter your password: ";
 		//write(clfd, sendbuf, strlen(sendbuf));
 		int lastMathedUserIndex = 0;
-		recv(clfd, readbuf, BUFSIZE, 0);
+		n = recv(clfd, readbuf, BUFSIZE, 0);
 		puts(readbuf);
 		for (i = 0; i < userindex; i++) {
 			if (validUser[i] == 1) {

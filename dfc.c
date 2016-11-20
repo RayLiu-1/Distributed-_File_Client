@@ -144,10 +144,10 @@ int set_config(char* file) {
 	{
 		char * pch;
 		pch = strtok(readBuf, " ");
-		if (strcmp(pch, "server")==0) {
+		if (strcmp(pch, "Server")==0) {
 			pch = strtok(NULL, " ");
 			strcpy(server[userindex], pch);
-			pch = strtok(NULL, ":");
+			pch = strtok(NULL, " ");
 			strcpy(serverIp[userindex++], pch);
 		}
 		else if (strcmp(pch, "Username:")) {

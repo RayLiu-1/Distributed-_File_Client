@@ -120,6 +120,7 @@ int set_server(int *sock, struct sockaddr_in *server,int serverindex) {
 	server->sin_addr.s_addr = inet_addr(pch);
 	server->sin_family = AF_INET;
 	pch = strtok(NULL, ":");
+	system("pause");
 	server->sin_port = htons(atoi(pch));
 	if (connect(*sock, (struct sockaddr *)server, sizeof(*server)) < 0)
 	{

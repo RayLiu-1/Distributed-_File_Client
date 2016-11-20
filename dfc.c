@@ -66,10 +66,7 @@ int main(int argc, char * argv[]) {
 		perror("USAGE:  <config file>\n");
 		exit(1);
 	}
-
-	char file[200];
-	strcpy(file, argv[1]);
-	set_config(file);
+	set_config(argv[1]);
 	while (getchar() != '\n');
 
 	struct timeval timeout;

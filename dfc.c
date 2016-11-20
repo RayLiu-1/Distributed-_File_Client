@@ -140,10 +140,10 @@ int main(int argc, char * argv[]) {
 									}
 								}
 								if (find == 0) {
-									strcpy(filelist[filesize++], readbuf[i] + 3);
+									strcpy(filelist[filesize], readbuf[i] + 3);
 									int part = readbuf[i][1] - '1';
 									int bitpart = 1 << part;
-									filemark[j] |= bitpart;
+									filemark[filesize++] |= bitpart;
 								}
 							}
 						}if (read_size == -1) {

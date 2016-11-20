@@ -67,7 +67,7 @@ int main(int argc, char * argv[]) {
 		exit(1);
 	}
 	char file[200];
-	//strcpy(file, argv[0]);
+	strcpy(file, argv[0]);
 	set_config(file);
 	struct timeval timeout;
 	timeout.tv_sec = 10;

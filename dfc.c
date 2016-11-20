@@ -144,7 +144,7 @@ int set_config(char* file) {
 		while (getchar() != '\n');
 		char * pch;
 		pch = strtok(readBuf, " ");
-		if (strcmp(pch, "server")) {
+		if (strcmp(pch, "server")==0) {
 			pch = strtok(NULL, " ");
 			strcpy(server[userindex], pch);
 			pch = strtok(NULL, ":");

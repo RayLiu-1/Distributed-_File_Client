@@ -90,14 +90,15 @@ int main(int argc, char * argv[]) {
 			write(sock[i], username, strlen(username));
 			//puts(username);
 			int n = recv(sock[i], readbuf[i], BUFSIZE, 0);
-
-			write(sock[i], password, strlen(password));
 			if (n = -1) {
 				connect[i] = 0;
 				printf("server%d disconnected\n", i + 1);
 				close(sock[i]);
 				break;
 			}
+
+			write(sock[i], password, strlen(password));
+			
 			int n = recv(sock[i], readbuf[i], BUFSIZE, 0);
 			if (n = -1) {
 				connect[i] = 0;

@@ -101,7 +101,7 @@ int main(int argc, char * argv[]) {
 		for (int i = 0; i < 4; i++)
 		{
 			scanf("%s", sendbuf[i]);
-			printf(Please enter command : );
+			printf("Please enter command: ");
 			int n = 0;
 			while (n = recv(sock[i], readbuf[i], BUFSIZE, 0)>0)
 			{

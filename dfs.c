@@ -92,10 +92,12 @@ void *connection_handler(void *sockfd) {
 		int validUser[100];//mark matched username
 		for (i = 0; i < userindex; i++) {
 			validUser[i] = 0;
+
 		}
 		for (i = 0; i < userindex; i++) {
 			if (strcmp(username[i], readbuf)==0) {
 				validUser[i] = 1;
+				puts(username[i]);
 			}
 		}
 		//sendbuf = "Please enter your password: ";
@@ -104,7 +106,7 @@ void *connection_handler(void *sockfd) {
 		recv(clfd, readbuf, BUFSIZE, 0);
 		for (i = 0; i < userindex; i++) {
 			if (validUser[i] == 1) {
-				puts(username[i]);
+				//puts();
 				if (strcmp(readbuf, password[i]) == 0) {
 					login = 1;
 					lastMathedUserIndex = i;

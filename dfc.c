@@ -63,13 +63,12 @@ void decrypt(char content[], char password[], int lenth)
 int main(int argc, char * argv[]) {
 	if (argc <2)
 	{
-		perror("USAGE:  <config file>\n");
+		perror("USAGE:  <config file>");
 		exit(1);
 	}
-	set_config(argv[1]);
-	
+	puts(argv[1]);
 	while (getchar() != '\n');
-
+	set_config(argv[1]);
 	struct timeval timeout;
 	timeout.tv_sec = 10;
 	timeout.tv_usec = 0;

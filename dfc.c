@@ -61,6 +61,7 @@ void decrypt(char content[], char password[], int lenth)
 }
 
 int main(int argc, char * argv[]) {
+	printf("%d", argc);
 	if (argc <1)
 	{
 		printf("USAGE:  <config file>\n");

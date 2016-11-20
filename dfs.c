@@ -133,7 +133,7 @@ void *connection_handler(void *sockfd) {
 			break;
 		}
 		char *pch = readbuf;
-		pch = strtok(readbuf, " ");
+		pch = strtok(readbuf, " \n");
 		if(strlen(pch)!=0 && strcmp(pch,"PUT")==0){
 			char filename[200];
 			memset(filename, 0, sizeof(filename));
@@ -187,7 +187,6 @@ void *connection_handler(void *sockfd) {
 			dp = opendir(filepath);
 			if (dp) {
 				while ((dir = readdir(dp)) != NULL ) {
-					puts("asd");
 					sprintf(sendbuf, "%s\n", dir->d_name);
 					write(clfd, sendbuf, strlen(sendbuf));
 				}

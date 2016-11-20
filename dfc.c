@@ -114,7 +114,7 @@ int main(int argc, char * argv[]) {
 			printf("Please enter command: ");
 			char commond[BUFSIZE];
 			fgets(commond, BUFSIZE, stdin);
-			if (strncmp(commond, "LIST ",5) == 0) {
+			if (strncmp(commond, "LIST ",5) == 0||strcmp(commond,"LIST")==0) {
 				for (int i = 0; i < 4; i++)
 				{	
 					if (connect[i] == 1)

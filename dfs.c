@@ -104,6 +104,7 @@ void *connection_handler(void *sockfd) {
 		recv(clfd, readbuf, BUFSIZE, 0);
 		for (i = 0; i < userindex; i++) {
 			if (validUser[i] == 1) {
+				puts(username[i]);
 				if (strcmp(readbuf, password[i]) == 0) {
 					login = 1;
 					lastMathedUserIndex = i;

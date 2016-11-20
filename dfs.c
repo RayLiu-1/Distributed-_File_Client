@@ -187,8 +187,10 @@ void *connection_handler(void *sockfd) {
 			dp = opendir(filepath);
 			if (dp) {
 				while ((dir = readdir(dp)) != NULL ) {
+					strcpy(sendbuf, "");
 					sprintf(sendbuf, "%s\n", dir->d_name);
 					write(clfd, sendbuf, strlen(sendbuf));
+					puts(sendbuf);
 				}
 				closedir(dp);
 			}

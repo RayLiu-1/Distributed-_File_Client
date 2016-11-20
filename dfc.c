@@ -157,7 +157,9 @@ int main(int argc, char * argv[]) {
 					if ((filemark[i] & 15) == 15)
 						puts(filelist[i]);
 					else
-						printf("%s[incomplete]\n",filelist[i]);
+					{
+						printf("%d[incomplete]\n", filemark[i]);
+					}
 				}
 
 			}

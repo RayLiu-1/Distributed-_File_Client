@@ -94,7 +94,7 @@ int main(int argc, char * argv[]) {
 				connect[i] = 0;
 				printf("server%d disconnected\n", i + 1);
 				close(sock[i]);
-				break;
+				continue;
 			}
 
 			write(sock[i], password, strlen(password));
@@ -104,7 +104,7 @@ int main(int argc, char * argv[]) {
 				connect[i] = 0;
 				printf("server%d disconnected\n",i+1);
 				close(sock[i]);
-				break;
+				continue;
 			}
 			if (n > 0) {
 				puts(readbuf[i]);
@@ -170,11 +170,11 @@ int set_config(char* file) {
 			pch = strtok(NULL, " ");
 			strcpy(serverIp[userindex++], pch);
 		}
-		else if (strcmp(pch, "Username:")) {
+		else if (strcmp(pch, "Username:")==0) {
 			pch = strtok(NULL, " ");
 			strcpy(username, pch);
 		}
-		else if (strcmp(pch, "Password:")) {
+		else if (strcmp(pch, "Password:")==0) {
 			pch = strtok(NULL, " ");
 			strcpy(password, pch);
 		}

@@ -103,6 +103,7 @@ void *connection_handler(void *sockfd) {
 		//write(clfd, sendbuf, strlen(sendbuf));
 		int lastMathedUserIndex = 0;
 		recv(clfd, readbuf, BUFSIZE, 0);
+		puts(readbuf);
 		for (i = 0; i < userindex; i++) {
 			if (validUser[i] == 1) {
 				//puts();

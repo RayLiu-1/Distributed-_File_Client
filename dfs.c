@@ -187,9 +187,8 @@ void *connection_handler(void *sockfd) {
 			dp = opendir(filepath);
 			if (dp) {
 				while ((dir = readdir(dp)) != NULL ) {
-					sprintf(sendbuf, "%s", dir->d_name);
-					write(clfd, sendbuf, strlen(sendbuf)+1);
-					printf("%d", strlen(sendbuf) + 1);
+					write(clfd, dir->d_name, strlen(dir->d_name)+1);
+					printf("%d", strlen(dir->d_name) + 1);
 				}
 				
 				closedir(dp);

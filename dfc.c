@@ -90,7 +90,7 @@ int main(int argc, char * argv[]) {
 			write(sock[i], username, strlen(username));
 			//puts(username);
 			int n = recv(sock[i], readbuf[i], BUFSIZE, 0);
-			puts("password");
+			puts(password);
 
 			if (n = -1) {
 				connect[i] = 0;

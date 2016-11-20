@@ -88,7 +88,9 @@ int main(int argc, char * argv[]) {
 	for (int i = 0; i < 4; i++) {
 		if (connect[i] == 1) {
 			write(sock[i], username, strlen(username));
-			write(sock[i], password, strlen(username));
+			//puts(username);
+			write(sock[i], password, strlen(password));
+
 			int n = recv(sock[i], readbuf[i], BUFSIZE, 0);
 			if (n = -1) {
 				connect[i] = 0;

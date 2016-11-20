@@ -83,7 +83,7 @@ void *connection_handler(void *sockfd) {
 	memset(sendbuf, 0, BUFSIZE);
 	char filepath[200];
 	int login = 0;
-	while (login == 0)
+	if (login == 0)
 	{
 		//sendbuf = "Please enter your username: ";
 		//write(clfd, sendbuf, strlen(sendbuf));
@@ -113,7 +113,6 @@ void *connection_handler(void *sockfd) {
 		if (login==0) {
 			strcpy(sendbuf,"Invalid Username/Password. \n");
 			write(clfd, sendbuf, strlen(sendbuf));
-			break;
 		}
 		else {
 			strcat(filepath, "//");

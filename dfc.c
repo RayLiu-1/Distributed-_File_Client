@@ -66,8 +66,6 @@ int main(int argc, char * argv[]) {
 		perror("USAGE:  <config file>");
 		exit(1);
 	}
-	puts(argv[1]);
-	while (getchar() != '\n');
 	set_config(argv[1]);
 	struct timeval timeout;
 	timeout.tv_sec = 10;
@@ -133,6 +131,7 @@ int set_server(int *sock, struct sockaddr_in *server,int serverindex) {
 
 int set_config(char* file) {
 	FILE *fp;
+	while (getchar() != '\n');
 	fp = fopen(file, "r");
 	if (fp == NULL) {
 		perror("failed file opening");

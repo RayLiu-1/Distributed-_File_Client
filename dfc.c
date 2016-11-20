@@ -91,7 +91,7 @@ int main(int argc, char * argv[]) {
 			//puts(username);
 			int n = recv(sock[i], readbuf[i], BUFSIZE, 0);
 			puts(readbuf[i]);
-			if (n = -1) {
+			if (n == -1) {
 				connect[i] = 0;
 				printf("server%d disconnected\n", i + 1);
 				close(sock[i]);
@@ -100,7 +100,7 @@ int main(int argc, char * argv[]) {
 
 			write(sock[i], password, strlen(password));
 			n = recv(sock[i], readbuf[i], BUFSIZE, 0);
-			if (n = -1) {
+			if (n == -1) {
 				connect[i] = 0;
 				printf("server%d disconnected\n",i+1);
 				close(sock[i]);

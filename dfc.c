@@ -125,7 +125,8 @@ int main(int argc, char * argv[]) {
 						strcpy(readbuf[i] , "");
 						read_size = recv(sock[i], readbuf[i], BUFSIZE, 0);
 						while (read_size>0) {
-							printf("%dstring:%s",read_size,readbuf[i]);
+							readbuf[i][read_size] = '\0';
+							puts(readbuf[i]);
 							read_size = recv(sock[i], readbuf[i], BUFSIZE, 0);
 							
 						}

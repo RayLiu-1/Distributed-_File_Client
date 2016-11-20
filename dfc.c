@@ -122,8 +122,7 @@ int main(int argc, char * argv[]) {
 				}
 				for (int i = 0; i < 4; i++) {
 					if (connect[i] == 1) {
-						while (read_size = recv(sock[i], readbuf[i], BUFSIZE, 0)>0) {
-							if(strcmp(readbuf[i],".\n")!=0 && strcmp(readbuf[i], "..\n") != 0 && strcmp(readbuf[i], "d") != 0)
+						while ((read_size = recv(sock[i], readbuf[i], BUFSIZE, 0))>0) {
 							printf(readbuf[i]);
 						}
 					}

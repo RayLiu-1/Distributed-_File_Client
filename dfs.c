@@ -18,7 +18,7 @@
 
 #define BUFSIZE 4096
 #define QUESIZE 4// maximum number of client connections
-char DocumentRoot[200] = "./";
+char DocumentRoot[200] = ".";
 char username[100][16];
 char password[100][32];
 int userindex = 0;
@@ -82,6 +82,7 @@ void *connection_handler(void *sockfd) {
 	memset(readbuf, 0, BUFSIZE);
 	memset(sendbuf, 0, BUFSIZE);
 	char filepath[200];
+	strcpy(filepath, DocumentRoot);
 	int n = 0;
 	int login = 0;
 	if (login == 0)
@@ -119,7 +120,7 @@ void *connection_handler(void *sockfd) {
 			write(clfd, sendbuf, strlen(sendbuf));
 		}
 		else {
-			strcat(filepath, "//");
+			strcat(filepath, "/");
 			strcat(filepath, username[lastMathedUserIndex]);
 			strcpy(sendbuf,"logged");
 			puts("logged");

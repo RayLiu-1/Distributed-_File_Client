@@ -112,14 +112,13 @@ int main(int argc, char * argv[]) {
 		while (1) {
 			int read_size = 0;
 			printf("Please enter command: ");
-			scanf("%s", readbuf[i]);
-			strcpy(sendbuf, readbuf);
-			char pch = sendbuf[i]
-			if (strcmp(sendbuf, "LIST") == 0) {
+			char commond[BUFSIZE];
+			fgets(commond, BUFSIZE, stdin);
+			if (strcmp(commond, "LIST ",5) == 0) {
 				for (int i = 0; i < 4; i++)
 				{	
 					if (connect[i] == 1)
-						write(sock[i], sendbuf, strlen(sendbuf));
+						write(sock[i], commond, strlen(commond));
 				}
 				for (int i = 0; i < 4; i++) {
 					if (connect[i] == 1) {

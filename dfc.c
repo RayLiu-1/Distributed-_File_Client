@@ -126,7 +126,7 @@ int main(int argc, char * argv[]) {
 							printf("%d\n", read_size);
 						}
 						if (read_size = 0) {
-							pits("ppp");
+							puts("ppp");
 						}
 					}
 				}

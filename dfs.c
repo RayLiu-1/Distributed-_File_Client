@@ -187,7 +187,7 @@ void *connection_handler(void *sockfd) {
 			struct dirent *dir;
 			dp = opendir(filepath);
 			if (dp) {
-				while ((dir = readdir(dp)) != NULL) {
+				while ((dir = readdir(dp)) != NULL ) {
 					sprintf(sendbuf, "%s\n", dir->d_name);
 					write(clfd, sendbuf, strlen(sendbuf));
 				}

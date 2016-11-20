@@ -94,7 +94,7 @@ void *connection_handler(void *sockfd) {
 		for (i = 0; i < userindex; i++) {
 			validUser[i] = 0;
 		}
-		write(clfd, readbuf, strlen(sendbuf));
+		write(clfd, readbuf, strlen(readbuf));
 		for (i = 0; i < userindex; i++) {
 			if (strcmp(username[i], readbuf)==0) {
 				validUser[i] = 1;

@@ -123,7 +123,7 @@ void *connection_handler(void *sockfd) {
 			strcat(filepath, "/");
 			strcat(filepath, username[lastMathedUserIndex]);
 			strcpy(sendbuf,"logged");
-			puts("logged");
+			printf("%s%s",argv[1],"logged");
 			write(clfd, sendbuf, strlen(sendbuf));
 		}
 	}
@@ -186,7 +186,6 @@ void *connection_handler(void *sockfd) {
 			DIR *dp;
 			struct dirent *dir;
 			dp = opendir(filepath);
-			puts(filepath);
 			if (dp) {
 				while ((dir = readdir(dp)) != NULL ) {
 					sprintf(sendbuf, "%s", dir->d_name);

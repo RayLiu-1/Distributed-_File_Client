@@ -195,6 +195,7 @@ void *connection_handler(void *sockfd) {
 				}
 				closedir(dp);
 			}
+			write(clfd, senbuf, 0);
 		}
 	}
 	if(read_size==0)

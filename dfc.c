@@ -114,6 +114,7 @@ int set_server(int *sock, struct sockaddr_in *server,int serverindex) {
 	}
 	printf("Socket%d created\n", serverindex +1);
 	char * pch = serverIp[serverindex];
+	printf("%s\n", pch);
 	pch = strtok(serverIp[serverindex], ":");
 	server->sin_addr.s_addr = inet_addr(pch);
 	server->sin_family = AF_INET;
@@ -141,7 +142,6 @@ int set_config(char* file) {
 	userindex = 0;
 	while (fgets(readBuf, BUFSIZE, (FILE*)fp))
 	{
-		while (getchar() != '\n');
 		char * pch;
 		pch = strtok(readBuf, " ");
 		if (strcmp(pch, "server")==0) {

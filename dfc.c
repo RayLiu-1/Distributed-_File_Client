@@ -79,7 +79,7 @@ int main(int argc, char * argv[]) {
 	int connect[4];
 
 	for (int i = 0; i < 4; i++) {
-		connect[i] = set_server(&sock[i], &server[i], i);
+		connect[i] = set_server(&(sock[i]), &(server[i]), i);
 		if (connect[i] == 1) {
 			if (setsockopt(sock[i], SOL_SOCKET, SO_RCVTIMEO, (char *)&timeout,
 				sizeof(timeout)) < 0)
@@ -95,7 +95,7 @@ int main(int argc, char * argv[]) {
 				int n = recv(sock[i], readbuf[i], BUFSIZE, 0);
 				if (n = -1) {
 					connect[i] == 0;
-					puts("server%d disconnected");
+					printf("server%d disconnected",i);
 					close(sock[i]);
 				}
 				//if(strcpy())

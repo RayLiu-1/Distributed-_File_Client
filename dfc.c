@@ -131,8 +131,9 @@ int set_server(int *sock, struct sockaddr_in *server,int serverindex) {
 
 int set_config(char* file) {
 	FILE *fp;
-	while (getchar() != '\n');
 	fp = fopen(file, "r");
+	while (getchar() != '\n');
+
 	if (fp == NULL) {
 		perror("failed file opening");
 		return 1;

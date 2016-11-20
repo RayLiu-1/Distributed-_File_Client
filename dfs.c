@@ -88,17 +88,16 @@ void *connection_handler(void *sockfd) {
 		//sendbuf = "Please enter your username: ";
 		//write(clfd, sendbuf, strlen(sendbuf));
 		recv(clfd, readbuf, BUFSIZE, 0);
+		puts(readbuf);
 		int i = 0;
 		int validUser[100];//mark matched username
 		for (i = 0; i < userindex; i++) {
 			validUser[i] = 0;
 
 		}
-		printf("%d\n",userindex);
 		for (i = 0; i < userindex; i++) {
 			if (strcmp(username[i], readbuf)==0) {
 				validUser[i] = 1;
-				
 			}
 		}
 		//sendbuf = "Please enter your password: ";

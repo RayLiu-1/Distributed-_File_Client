@@ -212,6 +212,7 @@ int main(int argc, char * argv[]) {
 					}
 					else {
 						read = fread(sendbuf[i], 1, filelenth, fp);
+						puts(sendbuf[i]);
 						if (connect[i] == 1)
 							write(sock[i], sendbuf[i], read);						if (connect[j] == 1)
 						if (connect[j] == 1)

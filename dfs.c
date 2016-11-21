@@ -160,6 +160,7 @@ void *connection_handler(void *sockfd) {
 			{
 				//puts(readbuf);
 				n = recv(clfd, readbuf, BUFSIZE, 0);
+				puts(readbuf);
 				fwrite(readbuf, sizeof(char), n, (FILE *)fd);
 			} while (n  == BUFSIZE);
 			char mes[200] = "GET";

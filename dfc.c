@@ -356,7 +356,7 @@ int main(int argc, char * argv[]) {
 								decrypt(readbuf[j], password, n);
 								fwrite(readbuf[j], 1, n, fp);
 								puts(readbuf[j]);
-							} while (n == BUFSIZE)j64r
+							} while (n == BUFSIZE);
 						}
 					}
 				}

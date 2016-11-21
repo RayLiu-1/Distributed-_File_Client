@@ -166,12 +166,12 @@ int main(int argc, char * argv[]) {
 			}
 			if ((strncmp(commond, "POST ", 5) == 0) && strlen(commond)>5) {
 				char* pch = commond;
-				pch = strtok(commond, " ");
-				pch = strtok(NULL, " ");
+				pch = strtok(commond, " \n");
+				pch = strtok(NULL, " \n");
 				char filename[200];
 				strncpy(filename, pch, 200);
 				char subdir[200]="";
-				pch = strtok(NULL, " ");
+				pch = strtok(NULL, " \n");
 				if (pch != NULL) {
 					strcpy(subdir, filename);
 					strncpy(filename, pch, 200);

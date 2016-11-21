@@ -136,20 +136,20 @@ void *connection_handler(void *sockfd) {
 		pch = strtok(readbuf, " \n");
 		if(strlen(pch)!=0 && strcmp(pch,"PUT")==0){
 			char filename[200];
+			char filename1[200];
 			memset(filename, 0, sizeof(filename));
 			strcpy(filename, filepath);
 			strcat(filename, "/");		
-
-			pch = strtok(NULL, " ");	
-			strcat(filename, pch);
-			pch = strtok(NULL, " ");
+			pch = strtok(NULL, " \n");	
+			strcpy(filename1, pch);
+			pch = strtok(NULL, " \n");
 			char subdir[200];
 			strcpy(subdir, pch);
 			if (strlen(subdir) != 0 && subdir[strlen(subdir) - 1] == '/')
 			{
 				strcat(filename, subdir);
-				strcat(filename, "/");
 			}
+			strcat(filename, filename1);
 			FILE* fd= fopen(filename, "w");puts(filename);
 			if (!fd)
 				perror("fail to open file");

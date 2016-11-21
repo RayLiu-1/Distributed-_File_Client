@@ -173,8 +173,7 @@ int main(int argc, char * argv[]) {
 				char subdir[200]="";
 				pch = strtok(NULL, " \n");
 				if (pch != NULL) {
-					strcpy(subdir, filename);
-					strncpy(filename, pch, 200);
+					strncpy(subdir, pch, 200);
 				}
 				int hashvalue = hash_md5(filename);				
 
@@ -194,8 +193,8 @@ int main(int argc, char * argv[]) {
 				char filename1[200] = ".1.";
 				strcat(filename1, filename);
 				strcpy(sendbuf[i], "PUT ");
-				strcat(sendbuf[i], subdir);
 				strcat(sendbuf[i], filename1);
+				strcat(sendbuf[i], subdir);
 				write(sock[i], sendbuf[i], strlen(sendbuf[i])+ 1);
 				puts(sendbuf[i]);
 				write(sock[j], sendbuf[i], strlen(sendbuf[i]) + 1);

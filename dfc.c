@@ -334,6 +334,7 @@ filelenth -= BUFSIZE;
 						}
 						write(sock[i], mes, strlen(mes) + 1);
 						int n = recv(sock[i], readbuf[i], BUFSIZE, 0);
+						puts(readbuf[i]);
 						if (strcpy(readbuf[i], "YES")) {
 							bit[j] = 1;
 							write(sock[i], sendbuf[i], 1);

@@ -302,47 +302,48 @@ filelenth -= BUFSIZE;
 				recv(sock[i], readbuf[i], BUFSIZE, 0);
 				recv(sock[j], readbuf[i], BUFSIZE, 0);
 			}
-			else if ((strncmp(commond, "GET ", 4)) == 0) && strlen(commond) > 4){
-			char *pch = commond;
-			pch = strtok(pch, " \n");
-			pch = strtok(pch, " \n");
-			char filename[200] = "";
-			strcpy(filename, pch);
-			pch = strtok(pch, " \n");
-			char subdir[200] = "";
-			if (pch != NULL) {
-				strcpy(subdir, pch);
-			}
-			char part[4][10];
-			strcpy(part[0], ".1.");
-			strcpy(part[1], ".2.");
-			strcpy(part[2], ".3.");
-			strcpy(part[3], ".4.");
-			int bit[4] = { 0,0,0,0, };
-			FILE * fp = open(filename, "w");
-			for (int i = 0; i < 4; i++) {
-				for (int j = 0; j < 4; j++)
-				{
-					if (bit[j] == 1)
-						continue;
-					char mes[200] = "GET ";
-					strcat(mes, part[j]);
-					strcat(mes, filename);
-					if (strlen(subdir) == 0) {
-						strcar(mes, " ");
-						strcar(mes,subdir)
-					}
-					write(sock[i], mes, strlen(mes)+1);
-					int n = recv(sock[i], readbuf[i], BUFSIZE, 0);
-					if (strcpy(readbuf[i], "YES")) {
-						bit[j] = 1;
-						write(sock[i], sendbuf[i], 1, 0);
-						while (n = recv(sock[i], readbuf[i], BUFSIZE, 0)) {
-							fwrite(readbuf[i], 1, n, fp);
+			else if ((strncmp(commond, "GET ", 4)) == 0 && strlen(commond) > 4){
+				char *pch = commond;
+				pch = strtok(pch, " \n");
+				pch = strtok(pch, " \n");
+				char filename[200] = "";
+				strcpy(filename, pch);
+				pch = strtok(pch, " \n");
+				char subdir[200] = "";
+				if (pch != NULL) {
+					strcpy(subdir, pch);
+				}
+				char part[4][10];
+				strcpy(part[0], ".1.");
+				strcpy(part[1], ".2.");
+				strcpy(part[2], ".3.");
+				strcpy(part[3], ".4.");
+				int bit[4] = { 0,0,0,0, };
+				FILE * fp = open(filename, "w");
+				for (int i = 0; i < 4; i++) {
+					for (int j = 0; j < 4; j++)
+					{
+						if (bit[j] == 1)
+							continue;
+						char mes[200] = "GET ";
+						strcat(mes, part[j]);
+						strcat(mes, filename);
+						if (strlen(subdir) == 0) {
+							strcar(mes, " ");
+							strcar(mes, subdir)
+						}
+						write(sock[i], mes, strlen(mes) + 1);
+						int n = recv(sock[i], readbuf[i], BUFSIZE, 0);
+						if (strcpy(readbuf[i], "YES")) {
+							bit[j] = 1;
+							write(sock[i], sendbuf[i], 1, 0);
+							while (n = recv(sock[i], readbuf[i], BUFSIZE, 0)) {
+								fwrite(readbuf[i], 1, n, fp);
+							}
 						}
 					}
 				}
-		}
+			}
 
 	}
 	return 0;

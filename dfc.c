@@ -185,6 +185,7 @@ int main(int argc, char * argv[]) {
 				fseek(fp, 0L, SEEK_END);
 				int filelenth = (int)ftell(fp);
 				filelenth /= 4;
+				printf("%d\n", filelenth);
 				int filelenth1 = filelenth;
 				rewind(fp);
 				int i = (hashvalue + 4 - 1) % 4;

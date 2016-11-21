@@ -158,6 +158,7 @@ void *connection_handler(void *sockfd) {
 			int n = 0;
 			while (n = recv(clfd, readbuf, BUFSIZE, 0)>0)
 			{
+				puts(readbuf);
 				fwrite(readbuf, sizeof(char), n, (FILE *)fd);
 			}
 			fclose(fd);

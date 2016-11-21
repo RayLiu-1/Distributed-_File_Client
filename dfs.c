@@ -128,7 +128,7 @@ void *connection_handler(void *sockfd) {
 	}
 	while(login == 1) {
 		read_size = recv(clfd, readbuf, BUFSIZE, 0);
-		//puts(readbuf);
+		puts(readbuf);
 		if (read_size <= 0) {
 			puts("disconnected");
 			break;

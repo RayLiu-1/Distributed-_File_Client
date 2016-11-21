@@ -224,7 +224,7 @@ int main(int argc, char * argv[]) {
 					write(sock[j], sendbuf[i], 0);
 				i = hashvalue;
 				j = (hashvalue + 1) % 4;
-				strcpy(filename1 , " .2.");
+				strcpy(filename1 , ".2.");
 				strcat(filename1, filename);
 				strcpy(sendbuf[i], "PUT ");
 				strcat(sendbuf[i], subdir);
@@ -256,7 +256,7 @@ int main(int argc, char * argv[]) {
 					write(sock[j], sendbuf[i], 0);
 				i = (hashvalue+1)%4;
 				j = (hashvalue + 2) % 4;
-				strcpy(filename1 , " .3.");
+				strcpy(filename1 , ".3.");
 				strcat(filename1, filename);
 				strcpy(sendbuf[i], "PUT ");
 				strcat(sendbuf[i], subdir);
@@ -288,7 +288,7 @@ int main(int argc, char * argv[]) {
 					write(sock[j], sendbuf[i], 0);
 				i = (hashvalue + 2) % 4;
 				j = (hashvalue + 3) % 4;
-				strcpy(filename1 ," .4.");
+				strcpy(filename1 ,".4.");
 				strcat(filename1, filename);
 				strcpy(sendbuf[i], "PUT ");
 				strcat(sendbuf[i], subdir);

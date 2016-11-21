@@ -134,6 +134,7 @@ void *connection_handler(void *sockfd) {
 		}
 		char *pch = readbuf;
 		pch = strtok(readbuf, " \n");
+		puts(pch);
 		if(strlen(pch)!=0 && strcmp(pch,"PUT")==0){
 			puts(pch);
 			char filename[200];

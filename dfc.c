@@ -176,9 +176,9 @@ int main(int argc, char * argv[]) {
 					strcpy(subdir, filename);
 					strncpy(filename, pch, 200);
 				}
-				int hashvalue = hash_md5(filename);				getchar();
+				int hashvalue = hash_md5(filename);				
 
-				FILE* fp = fopen(filename, "r");
+				FILE* fp = fopen(filename, "r");getchar();
 				fseek(fp, 0, SEEK_END);
 				int filelenth = (int)ftell(fp);
 				filelenth /= 4;

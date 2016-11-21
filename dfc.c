@@ -164,7 +164,7 @@ int main(int argc, char * argv[]) {
 				}
 
 			}
-			if ((strncmp(commond, "POST ", 5) == 0) && strlen(commond)>5) {
+			if ((strncmp(commond, "PUT ", 4) == 0) && strlen(commond)>4) {
 				char* pch = commond;
 				pch = strtok(commond, " \n");
 				pch = strtok(NULL, " \n");
@@ -193,7 +193,7 @@ int main(int argc, char * argv[]) {
 
 				char filename1[200] = " .1.";
 				strcat(filename1, filename);
-				strcpy(sendbuf[i], "POST ");
+				strcpy(sendbuf[i], "PUT ");
 				strcat(sendbuf[i], subdir);
 				strcat(sendbuf[i], filename1);
 				write(sock[i], sendbuf[i], strlen(sendbuf[i])+ 1);
@@ -225,7 +225,7 @@ int main(int argc, char * argv[]) {
 				j = (hashvalue + 1) % 4;
 				strcpy(filename1 , " .2.");
 				strcat(filename1, filename);
-				strcpy(sendbuf[i], "POST ");
+				strcpy(sendbuf[i], "PUT ");
 				strcat(sendbuf[i], subdir);
 				strcat(sendbuf[i], filename1);
 				write(sock[i], sendbuf[i], strlen(sendbuf[i]) + 1);
@@ -257,7 +257,7 @@ int main(int argc, char * argv[]) {
 				j = (hashvalue + 2) % 4;
 				strcpy(filename1 , " .3.");
 				strcat(filename1, filename);
-				strcpy(sendbuf[i], "POST ");
+				strcpy(sendbuf[i], "PUT ");
 				strcat(sendbuf[i], subdir);
 				strcat(sendbuf[i], filename1);
 				write(sock[i], sendbuf[i], strlen(sendbuf[i]) + 1);
@@ -289,7 +289,7 @@ int main(int argc, char * argv[]) {
 				j = (hashvalue + 3) % 4;
 				strcpy(filename1 ," .4.");
 				strcat(filename1, filename);
-				strcpy(sendbuf[i], "POST ");
+				strcpy(sendbuf[i], "PUT ");
 				strcat(sendbuf[i], subdir);
 				strcat(sendbuf[i], filename1);
 				write(sock[i], sendbuf[i], strlen(sendbuf[i]) + 1);

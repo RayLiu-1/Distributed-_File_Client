@@ -286,7 +286,7 @@ int main(int argc, char * argv[]) {
 				} while (filelenth > 0);
 				if (connect[i] == 1)
 					write(sock[i], sendbuf[i], 0);
-				if (connect[j] == 1
+				if (connect[j] == 1)
 					write(sock[j], sendbuf[i], 0);
 				i = (hashvalue + 2) % 4;
 				j = (hashvalue + 3) % 4;

@@ -337,7 +337,7 @@ filelenth -= BUFSIZE;
 						if (strcpy(readbuf[i], "YES")) {
 							bit[j] = 1;
 							write(sock[i], sendbuf[i], 1);
-							while (n = recv(sock[i], readbuf[i], BUFSIZE, 0)) {
+							while (n = recv(sock[i], readbuf[i], BUFSIZE, 0)>0) {
 								fwrite(readbuf[i], 1, n, fp);
 							}
 						}

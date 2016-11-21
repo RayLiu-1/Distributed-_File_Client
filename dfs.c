@@ -17,7 +17,7 @@
 #include <dirent.h>
 
 #define BUFSIZE 4096
-#define QUESIZE 4// maximum number of client connections
+#define QUESIZE 40// maximum number of client connections
 char DocumentRoot[200] = ".";
 char username[100][16];
 char password[100][32];

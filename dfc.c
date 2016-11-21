@@ -222,10 +222,8 @@ int main(int argc, char * argv[]) {
 						filelenth = 0;
 					}
 				} while (filelenth > 0);
-				if (connect[i] == 1)
-					write(sock[i], sendbuf[i], 0);
-				if (connect[j] == 1)
-					write(sock[j], sendbuf[i], 0);
+				write(sock[i], sendbuf[i], 0);
+				write(sock[j], sendbuf[i], 0);
 				recv(sock[i], readbuf[i], BUFSIZE, 0);
 				puts(readbuf[i]);
 
@@ -257,10 +255,8 @@ int main(int argc, char * argv[]) {
 						filelenth = 0;
 					}
 				} while (filelenth > 0);
-				if (connect[i] == 1)
-					write(sock[i], sendbuf[i], 0);
-				if (connect[j] == 1)
-					write(sock[j], sendbuf[i], 0);
+				write(sock[i], sendbuf[i], 0);
+				write(sock[j], sendbuf[i], 0);
 				recv(sock[i], readbuf[i], BUFSIZE, 0);
 				puts(readbuf[i]);
 				i = (hashvalue+1)%4;
@@ -291,10 +287,8 @@ int main(int argc, char * argv[]) {
 						filelenth = 0;
 					}
 				} while (filelenth > 0);
-				if (connect[i] == 1)
-					write(sock[i], sendbuf[i], 0);
-				if (connect[j] == 1)
-					write(sock[j], sendbuf[i], 0);
+				write(sock[i], sendbuf[i], 0);
+				write(sock[j], sendbuf[i], 0);
 				recv(sock[i], readbuf[i], BUFSIZE, 0);
 				puts(readbuf[i]);
 
@@ -315,10 +309,8 @@ int main(int argc, char * argv[]) {
 					if (connect[j] == 1)
 						write(sock[j], sendbuf[i], read);
 				} while (read > 0);
-				if (connect[i] == 1)
-					write(sock[i], sendbuf[i], 0);
-				if (connect[j] == 1)
-					write(sock[j], sendbuf[i], 0);
+				write(sock[i], sendbuf[i], 0);
+				write(sock[j], sendbuf[i], 0);
 				recv(sock[i], readbuf[i], BUFSIZE, 0);
 
 			}

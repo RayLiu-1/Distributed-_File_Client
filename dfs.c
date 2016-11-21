@@ -133,7 +133,7 @@ void *connection_handler(void *sockfd) {
 			break;
 		}
 		char *pch = readbuf;
-		pch = strtok(readbuf, " \n");
+		pch = strtok(readbuf, " \n");puts(readbuf);
 		if(strlen(pch)!=0 && strcmp(pch,"PUT")==0){
 			char filename[200];
 			char filename1[200];
@@ -144,7 +144,7 @@ void *connection_handler(void *sockfd) {
 			strcpy(filename1, pch);
 			pch = strtok(NULL, " \n");
 			char subdir[200];
-			strcpy(subdir, pch);puts(readbuf);
+			strcpy(subdir, pch);
 			if (strlen(subdir) != 0 && subdir[strlen(subdir) - 1] == '/')
 			{
 				strcat(filename, subdir);

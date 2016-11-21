@@ -16,6 +16,7 @@
 #include <stdlib.h>
 #include <limits.h>
 
+#define BUFSIZE 4096
 
 char DocumentRoot[200] = "/";
 char server[4][100];
@@ -245,11 +246,11 @@ int set_config(char* file) {
 int hash_md5(char *file) {
 	char cmd[200];
 	sprintf(cmd, "MD5SUM %s", file);
-	FIlE *fp = popen(cmd, "r");
+	FILE *fp = popen(cmd, "r");
 	int md5 = 0;
 	fscanf(fp, "%x", &md5);
 	printf("%x", md5);
-	return md5%4
+	return md5 % 4;
 }
 
 //void *connection_handler(void *sockfd) {}

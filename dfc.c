@@ -176,7 +176,8 @@ int main(int argc, char * argv[]) {
 					strcpy(subdir, filename);
 					strncpy(filename, pch, 200);
 				}
-				int hashvalue = hash_md5(filename);
+				int hashvalue = hash_md5(filename);				getchar();
+
 				FILE* fp = fopen(filename, "r");
 				fseek(fp, 0, SEEK_END);
 				int filelenth = (int)ftell(fp);
@@ -185,7 +186,6 @@ int main(int argc, char * argv[]) {
 				rewind(fp);
 				int i = (hashvalue + 4 - 1) % 4;
 				int j = hashvalue;
-				getchar();
 
 				char filename1[200] = " .1.";
 				strcat(filename1, filename);

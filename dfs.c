@@ -155,11 +155,11 @@ void *connection_handler(void *sockfd) {
 			if (!fd)
 				perror("fail to open file");
 			int n = 0;
-			while (n = recv(clfd, readbuf, BUFSIZE, 0)>0)
+			do 
 			{
 				puts(readbuf);
 				fwrite(readbuf, sizeof(char), n, (FILE *)fd);
-			}
+			}while(n = recv(clfd, readbuf, BUFSIZE, 0)<BUFSIZE)
 			char mes[200] = "GET";
 			fclose(fd);
 			write(clfd , mes, strlen(mes));

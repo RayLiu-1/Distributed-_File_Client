@@ -17,8 +17,6 @@
 #include <limits.h>
 
 
-#define BUFSIZE 4096
-#define QUESIZE 4// maximum number of client connections
 char DocumentRoot[200] = "/";
 char server[4][100];
 char serverIp[4][100];
@@ -27,7 +25,8 @@ char password[32];
 int userindex = 0;
 
 int set_server(int *sock, struct sockaddr_in *server, int index);
-int set_config(char file[]);
+int set_config(char *file);
+int hash_md5(char *file);
 //void *connection_handler(void *sockfd);
 
 void encrypt(char content[], char password[], int len)
@@ -164,6 +163,9 @@ int main(int argc, char * argv[]) {
 				}
 
 			}
+			if ((strncmp(commond, "POST ", 5) == 0) && strlen(commond)>5) {
+
+			}
 			
 	}
 	return 0;
@@ -229,6 +231,16 @@ int set_config(char* file) {
 	}
 	fclose(fp);
 	return 0;
+}
+
+int hash_md5(char *file) {
+	char cmd[200];
+	sprintf(cmd, "MD5SUM %s", file);
+	FIlE *fp = popen(cmd, "r");
+	int md5 = 0;
+	fscanf(fp, "%x", &md5);
+	printf("%x", md5);
+	return md5%4
 }
 
 //void *connection_handler(void *sockfd) {}

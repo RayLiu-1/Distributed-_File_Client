@@ -170,7 +170,7 @@ void *connection_handler(void *sockfd) {
 			char filename[200];
 			memset(filename, 0, sizeof(filename));
 			strcpy(filename, filepath);
-			strcat(filename, "//");
+			strcat(filename, "/");
 			pch = strtok(NULL, " ");
 			strcat(filename, pch);
 			int filensize = 0;

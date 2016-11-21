@@ -339,6 +339,7 @@ filelenth -= BUFSIZE;
 							write(sock[i], sendbuf[i], 1);
 							while (n = recv(sock[i], readbuf[i], BUFSIZE, 0)>0) {
 								fwrite(readbuf[i], 1, n, fp);
+								puts(readbuf[i]);
 							}
 						}
 					}

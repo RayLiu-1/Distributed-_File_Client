@@ -179,7 +179,11 @@ int main(int argc, char * argv[]) {
 				int hashvalue = hash_md5(filename);				
 
 				FILE* fp = fopen(filename, "r");
-				fseek(fp, 0L, SEEK_END);getchar();
+				if (fp == NULL) {
+					puts("Cann't find file");
+					continue;
+				}
+				fseek(fp, 0L, SEEK_END);
 				int filelenth = (int)ftell(fp);
 				filelenth /= 4;
 				int filelenth1 = filelenth;

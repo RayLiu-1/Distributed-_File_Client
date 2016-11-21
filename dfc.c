@@ -191,7 +191,7 @@ int main(int argc, char * argv[]) {
 				int i = (hashvalue + 4 - 1) % 4;
 				int j = hashvalue;
 
-				char filename1[200] = " .1.";
+				char filename1[200] = ".1.";
 				strcat(filename1, filename);
 				strcpy(sendbuf[i], "PUT ");
 				strcat(sendbuf[i], subdir);

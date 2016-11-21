@@ -323,10 +323,12 @@ filelenth -= BUFSIZE;
 				for (int i = 0; i < 4; i++) {
 					for (int j = 0; j < 4; j++)
 					{
-						if (bit[j] == 1)
+						if (bit[i] == 1)
+							continue;
+						if (connect[j] == 0)
 							continue;
 						char mes[200] = "GET ";
-						strcat(mes, part[j]);
+						strcat(mes, part[i]);
 						strcat(mes, filename);
 						if (strlen(subdir) == 0) {
 							strcat(mes, " ");
@@ -336,12 +338,11 @@ filelenth -= BUFSIZE;
 						int n = recv(sock[i], readbuf[i], BUFSIZE, 0);
 						puts(readbuf[i]);
 						if (strcmp(readbuf[i], "YES")==0) {
-							bit[j] = 1;
+							bit[i] = 1;
 							write(sock[i], sendbuf[i], 1);
 							do {
 								n = recv(sock[i], readbuf[i], BUFSIZE, 0);
 								fwrite(readbuf[i], 1, n, fp);
-								
 								puts(readbuf[i]);
 							} while (n == BUFSIZE);
 						}

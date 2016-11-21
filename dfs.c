@@ -141,9 +141,11 @@ void *connection_handler(void *sockfd) {
 			strcpy(filename, filepath);
 			strcat(filename, "/");		
 			pch = strtok(NULL, " \n");	
+			puts(pch);
 			strcpy(filename1, pch);
 			pch = strtok(NULL, " \n");
-			char subdir[200];
+			char subdir[200] ="";
+			if(pch!=NULL)
 			strcpy(subdir, pch);
 			if (strlen(subdir) != 0 && subdir[strlen(subdir) - 1] == '/')
 			{

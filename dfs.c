@@ -128,13 +128,12 @@ void *connection_handler(void *sockfd) {
 	}
 	while(login == 1) {
 		read_size = recv(clfd, readbuf, BUFSIZE, 0);
-		puts(readbuf);
 		if (read_size <= 0) {
 			puts("disconnected");
 			break;
 		}
 		char *pch = readbuf;
-		pch = strtok(readbuf, " \n");puts(readbuf);
+		pch = strtok(readbuf, " \n");//puts(readbuf);
 		if(strlen(pch)!=0 && strcmp(pch,"PUT")==0){
 			char filename[200];
 			char filename1[200];
@@ -157,7 +156,7 @@ void *connection_handler(void *sockfd) {
 			if (!fd)
 				perror("fail to open file");
 			int n = 0;
-			while (n = recv(clfd, readbuf, BUFSIZE, 0))
+			while (n = recv(clfd, readbuf, BUFSIZE, 0)>0)
 			{
 				fwrite(readbuf, sizeof(char), n, (FILE *)fd);
 			}

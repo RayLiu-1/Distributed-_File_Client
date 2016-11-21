@@ -162,7 +162,7 @@ void *connection_handler(void *sockfd) {
 			} while (n = recv(clfd, readbuf, BUFSIZE, 0) == BUFSIZE);
 			char mes[200] = "GET";
 			fclose(fd);
-			write(clfd , mes, strlen(mes));
+			write(clfd , mes, strlen(mes)+1);
 			
 		}
 		else if (strlen(pch) != 0 && strcmp(pch, "GET")==0) {

@@ -339,7 +339,7 @@ filelenth -= BUFSIZE;
 							bit[j] = 1;
 							write(sock[i], sendbuf[i], 1);
 							do {
-								n = recv(sock[i], readbuf[i], BUFSIZE, 0)
+								n = recv(sock[i], readbuf[i], BUFSIZE, 0);
 								fwrite(readbuf[i], 1, n, fp);
 								
 								puts(readbuf[i]);

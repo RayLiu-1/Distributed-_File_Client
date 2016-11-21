@@ -165,7 +165,7 @@ int main(int argc, char * argv[]) {
 
 			}
 			if ((strncmp(commond, "POST ", 5) == 0) && strlen(commond)>5) {
-				char pch = commond;
+				char* pch = commond;
 				pch = strtok(commond, " ");
 				pch = strtok(NULL, " ");
 				char filename[200];

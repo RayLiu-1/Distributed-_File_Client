@@ -244,6 +244,8 @@ int main(int argc, char * argv[]) {
 						if (connect[j] == 1)
 							write(sock[j], sendbuf[i], read);
 						filelenth = 0;
+						sendbuf[i][read] = '\0';
+						puts(sendbuf[i]);
 					}
 				} while (filelenth > 0);
 				recv(sock[i], readbuf[i], BUFSIZE, 0);
@@ -255,7 +257,6 @@ int main(int argc, char * argv[]) {
 				strcat(sendbuf[i], subdir);
 				strcat(sendbuf[i], filename1);
 				write(sock[i], sendbuf[i], strlen(sendbuf[i]) + 1);
-				puts(sendbuf[i]);
 				write(sock[j], sendbuf[i], strlen(sendbuf[i]) + 1);
 				filelenth = filelenth1;
 				do {

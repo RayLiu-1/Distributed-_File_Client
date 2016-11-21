@@ -159,8 +159,6 @@ void *connection_handler(void *sockfd) {
 			do 
 			{//puts(readbuf);
 				n = recv(clfd, readbuf, BUFSIZE, 0);
-				readbuf[n] = '\0';
-				puts(readbuf);
 				fwrite(readbuf, sizeof(char), n, (FILE *)fd);
 			} while (n  == BUFSIZE);
 			char mes[200] = "GET";

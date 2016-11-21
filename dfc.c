@@ -201,14 +201,16 @@ int main(int argc, char * argv[]) {
 				do {
 					if (BUFSIZE < filelenth) {
 						read = fread(sendbuf[i], sizeof(char), BUFSIZE, fp);
+						encrypt(sendbuf[i], password, read);
 						if(connect[i]==1)
-write(sock[i], sendbuf[i], read);
-if (connect[j] == 1)
-write(sock[j], sendbuf[i], read);
-filelenth -= BUFSIZE;
+							write(sock[i], sendbuf[i], read);
+						if (connect[j] == 1)
+							write(sock[j], sendbuf[i], read);
+						filelenth -= BUFSIZE;
 					}
 					else {
 						read = fread(sendbuf[i], sizeof(char), filelenth, fp);
+						encrypt(sendbuf[i], password, read);
 						if (connect[i] == 1)
 							write(sock[i], sendbuf[i], read);						if (connect[j] == 1)
 							if (connect[j] == 1)
@@ -233,6 +235,8 @@ filelenth -= BUFSIZE;
 				do {
 					if (BUFSIZE < filelenth) {
 						read = fread(sendbuf[i], 1, BUFSIZE, fp);
+						encrypt(sendbuf[i], password, read);
+
 						if (connect[i] == 1)
 							write(sock[i], sendbuf[i], read);
 						if (connect[j] == 1)
@@ -241,6 +245,8 @@ filelenth -= BUFSIZE;
 					}
 					else {
 						read = fread(sendbuf[i], 1, filelenth, fp);
+						encrypt(sendbuf[i], password, read);
+
 						if (connect[i] == 1)
 							write(sock[i], sendbuf[i], read);						if (connect[j] == 1)
 							if (connect[j] == 1)
@@ -266,6 +272,8 @@ filelenth -= BUFSIZE;
 				do {
 					if (BUFSIZE < filelenth) {
 						read = fread(sendbuf[i], 1, BUFSIZE, fp);
+						encrypt(sendbuf[i], password, read);
+
 						if (connect[i] == 1)
 							write(sock[i], sendbuf[i], read);
 						if (connect[j] == 1)
@@ -274,6 +282,8 @@ filelenth -= BUFSIZE;
 					}
 					else {
 						read = fread(sendbuf[i], 1, filelenth, fp);
+						encrypt(sendbuf[i], password, read);
+
 						if (connect[i] == 1)
 							write(sock[i], sendbuf[i], read);						if (connect[j] == 1)
 							if (connect[j] == 1)
@@ -294,6 +304,7 @@ filelenth -= BUFSIZE;
 				write(sock[j], sendbuf[i], strlen(sendbuf[i]) + 1);
 				filelenth = filelenth1;
 				while (read = fread(sendbuf[i], 1, BUFSIZE, fp) > 0) {
+					encrypt(sendbuf[i], password, read);
 					if (connect[i] == 1)
 						write(sock[i], sendbuf[i], read);
 					if (connect[j] == 1)
@@ -342,9 +353,10 @@ filelenth -= BUFSIZE;
 							write(sock[j], sendbuf[j], 1);
 							do {
 								n = recv(sock[j], readbuf[j], BUFSIZE, 0);
+								decrypt(readbuf[j], password, n);
 								fwrite(readbuf[j], 1, n, fp);
 								puts(readbuf[j]);
-							} while (n == BUFSIZE);
+							} while (n == BUFSIZE)j64r
 						}
 					}
 				}

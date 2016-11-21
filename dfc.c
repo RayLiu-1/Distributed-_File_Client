@@ -185,7 +185,8 @@ int main(int argc, char * argv[]) {
 				rewind(fp);
 				int i = (hashvalue + 4 - 1) % 4;
 				int j = hashvalue;
-		
+				getchar();
+
 				char filename1[200] = " .1.";
 				strcat(filename1, filename);
 				strcpy(sendbuf[i], "POST ");
@@ -194,7 +195,6 @@ int main(int argc, char * argv[]) {
 				write(sock[i], sendbuf[i], strlen(sendbuf[i])+ 1);
 				write(sock[j], sendbuf[i], strlen(sendbuf[i]) + 1);
 				int read = 0;
-				getchar();
 				do {
 					if (BUFSIZE < filelenth) {
 						read = fread(sendbuf[i], 1, BUFSIZE, fp);
@@ -375,6 +375,7 @@ int hash_md5(char *file) {
 	//printf("%s", md5);
 	char lbit[2];
 	strncpy(lbit, md5+ strlen(md5) - 1, 1);
+	fclose(fp);
 	return strtol(lbit, NULL, 16) % 4;
 }
 

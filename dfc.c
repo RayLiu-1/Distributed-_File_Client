@@ -218,10 +218,10 @@ int main(int argc, char * argv[]) {
 						filelenth = 0;
 					}
 				} while (filelenth > 0);
-				/*if (connect[i] == 1)
+				if (connect[i] == 1)
 					write(sock[i], sendbuf[i], 0);
 				if (connect[j] == 1)
-					write(sock[j], sendbuf[i], 0);*/
+					write(sock[j], sendbuf[i], 0);
 				i = hashvalue;
 				j = (hashvalue + 1) % 4;
 				strcpy(filename1 , ".2.");
@@ -250,10 +250,10 @@ int main(int argc, char * argv[]) {
 						filelenth = 0;
 					}
 				} while (filelenth > 0);
-				/*if (connect[i] == 1)
+				if (connect[i] == 1)
 					write(sock[i], sendbuf[i], 0);
 				if (connect[j] == 1)
-					write(sock[j], sendbuf[i], 0);*/
+					write(sock[j], sendbuf[i], 0);
 				i = (hashvalue+1)%4;
 				j = (hashvalue + 2) % 4;
 				strcpy(filename1 , ".3.");
@@ -282,10 +282,10 @@ int main(int argc, char * argv[]) {
 						filelenth = 0;
 					}
 				} while (filelenth > 0);
-				/*if (connect[i] == 1)
+				if (connect[i] == 1)
 					write(sock[i], sendbuf[i], 0);
-				if (connect[j] == 1)
-					write(sock[j], sendbuf[i], 0);*/
+				if (connect[j] == 1
+					write(sock[j], sendbuf[i], 0);
 				i = (hashvalue + 2) % 4;
 				j = (hashvalue + 3) % 4;
 				strcpy(filename1 ,".4.");
@@ -303,10 +303,10 @@ int main(int argc, char * argv[]) {
 					if (connect[j] == 1)
 						write(sock[j], sendbuf[i], read);
 				} while (read > 0);
-				/*if (connect[i] == 1)
+				if (connect[i] == 1)
 					write(sock[i], sendbuf[i], 0);
 				if (connect[j] == 1)
-					write(sock[j], sendbuf[i], 0);*/
+					write(sock[j], sendbuf[i], 0);
 			}
 			
 	}

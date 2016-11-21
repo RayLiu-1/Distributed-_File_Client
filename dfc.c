@@ -335,13 +335,15 @@ filelenth -= BUFSIZE;
 						write(sock[i], mes, strlen(mes) + 1);
 						int n = recv(sock[i], readbuf[i], BUFSIZE, 0);
 						puts(readbuf[i]);
-						if (strcpy(readbuf[i], "YES")) {
+						if (strcmp(readbuf[i], "YES")==0) {
 							bit[j] = 1;
 							write(sock[i], sendbuf[i], 1);
-							while (n = recv(sock[i], readbuf[i], BUFSIZE, 0)>0) {
+							do {
+								n = recv(sock[i], readbuf[i], BUFSIZE, 0)
 								fwrite(readbuf[i], 1, n, fp);
+								
 								puts(readbuf[i]);
-							}
+							} while (n == BUFSIZE);
 						}
 					}
 				}

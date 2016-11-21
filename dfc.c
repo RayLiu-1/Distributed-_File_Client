@@ -200,8 +200,7 @@ int main(int argc, char * argv[]) {
 				int read = 0;
 				do {
 					if (BUFSIZE < filelenth) {
-						read = fread(sendbuf[i], 1, BUFSIZE, fp);
-						puts(sendbuf[i]);
+						read = fread(sendbuf[i], sizeof(char), BUFSIZE, fp);
 						if(connect[i]==1)
 							write(sock[i], sendbuf[i], read);
 						if(connect[j]==1)
@@ -209,13 +208,13 @@ int main(int argc, char * argv[]) {
 						filelenth -= BUFSIZE;
 					}
 					else {
-						read = fread(sendbuf[i], 1, filelenth, fp);
-						puts(sendbuf[i]);
+						read = fread(sendbuf[i], sizeof(char), filelenth, fp);
 						if (connect[i] == 1)
 							write(sock[i], sendbuf[i], read);						if (connect[j] == 1)
 						if (connect[j] == 1)
 							write(sock[j], sendbuf[i], read);
 						filelenth = 0;
+						printf("%d\n", read);
 					}
 				} while (filelenth > 0);
 				recv(sock[i], readbuf[i], BUFSIZE, 0);

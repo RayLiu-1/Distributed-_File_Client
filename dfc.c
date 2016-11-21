@@ -330,7 +330,7 @@ filelenth -= BUFSIZE;
 						strcat(mes, filename);
 						if (strlen(subdir) == 0) {
 							strcat(mes, " ");
-							strcat(mes, subdir)
+							strcat(mes, subdir);
 						}
 						write(sock[i], mes, strlen(mes) + 1);
 						int n = recv(sock[i], readbuf[i], BUFSIZE, 0);

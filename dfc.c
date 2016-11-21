@@ -319,7 +319,7 @@ filelenth -= BUFSIZE;
 				strcpy(part[2], ".3.");
 				strcpy(part[3], ".4.");
 				int bit[4] = { 0,0,0,0, };
-				FILE * fp = open(filename, "w");
+				FILE * fp = fopen(filename, "w");
 				for (int i = 0; i < 4; i++) {
 					for (int j = 0; j < 4; j++)
 					{
@@ -343,6 +343,7 @@ filelenth -= BUFSIZE;
 						}
 					}
 				}
+				fclose(fp);
 			}
 
 	}

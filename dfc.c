@@ -194,6 +194,7 @@ int main(int argc, char * argv[]) {
 				write(sock[i], sendbuf[i], strlen(sendbuf[i])+ 1);
 				write(sock[j], sendbuf[i], strlen(sendbuf[i]) + 1);
 				int read = 0;
+				getchar();
 				do {
 					if (BUFSIZE < filelenth) {
 						read = fread(sendbuf[i], 1, BUFSIZE, fp);
@@ -290,13 +291,13 @@ int main(int argc, char * argv[]) {
 				write(sock[i], sendbuf[i], strlen(sendbuf[i]) + 1);
 				write(sock[j], sendbuf[i], strlen(sendbuf[i]) + 1);
 				filelenth = filelenth1;
-				/*do {
+				do {
 					read = fread(sendbuf[i], 1, BUFSIZE, fp);
 					if (connect[i] == 1)
 						write(sock[i], sendbuf[i], read);
 					if (connect[j] == 1)
 						write(sock[j], sendbuf[i], read);
-				} while (read > 0);*/
+				} while (read > 0);
 			}
 			
 	}

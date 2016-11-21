@@ -220,7 +220,6 @@ int main(int argc, char * argv[]) {
 				} while (filelenth > 0);
 				recv(sock[i], readbuf[i], BUFSIZE, 0);
 				//puts(readbuf[i]);
-
 				i = hashvalue;
 				j = (hashvalue + 1) % 4;
 				strcpy(filename1 , ".2.");

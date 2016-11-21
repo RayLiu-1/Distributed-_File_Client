@@ -157,9 +157,9 @@ void *connection_handler(void *sockfd) {
 				perror("fail to open file");
 			int n = 0;
 			do 
-			{
-				//puts(readbuf);
+			{//puts(readbuf);
 				n = recv(clfd, readbuf, BUFSIZE, 0);
+				readbuf[n] = '\0';
 				puts(readbuf);
 				fwrite(readbuf, sizeof(char), n, (FILE *)fd);
 			} while (n  == BUFSIZE);

@@ -170,12 +170,133 @@ int main(int argc, char * argv[]) {
 				pch = strtok(NULL, " ");
 				char filename[200];
 				strncpy(filename, pch, 200);
+				char subdir[200]="";
 				pch = strtok(NULL, " ");
 				if (pch != NULL) {
+					strcpy(subdir, filename);
 					strncpy(filename, pch, 200);
 				}
 				int hashvalue = hash_md5(filename);
-				printf("%d\n", hashvalue);
+				FILE* fp = fopen(filename, "r");
+				fseek(fp, 0, SEEK_END);
+				int filelenth = (int)ftell(fp);
+				filelenth /= 4;
+				int filelenth1 = filelenth;
+				rewind(fp);
+				int i = (hashvalue + 4 - 1) % 4;
+				int j = hashvalue;
+		
+				char filename1[200] = " .1.";
+				strcat(filename1, filename);
+				strcpy(sendbuf[i], "POST ");
+				strcat(sendbuf[i], subdir);
+				strcat(sendbuf[i], filename1);
+				write(sock[i], sendbuf[i], strlen(sendbuf[i])+ 1);
+				write(sock[j], sendbuf[i], strlen(sendbuf[i]) + 1);
+				int read = 0;
+				do {
+					if (BUFSIZE < filelenth) {
+						read = fread(sendbuf[i], 1, BUFSIZE, fp);
+						if(connect[i]==1)
+							write(sock[i], sendbuf[i], read);
+						if(connect[j]==1)
+							write(sock[j], sendbuf[i], read);
+						filelenth -= BUFSIZE;
+					}
+					else {
+						read = fread(sendbuf[i], 1, filelenth, fp);
+						if (connect[i] == 1)
+							write(sock[i], sendbuf[i], read);						if (connect[j] == 1)
+						if (connect[j] == 1)
+							write(sock[j], sendbuf[i], read);
+						filelenth = 0;
+					}
+				} while (filelenth > 0);
+				if (connect[i] == 1)
+					write(sock[i], sendbuf[i], 0);
+				if (connect[j] == 1)
+					write(sock[j], sendbuf[i], 0);
+				i = hashvalue;
+				j = (hashvalue + 1) % 4;
+				filename1[200] = " .2.";
+				strcat(filename1, filename);
+				strcpy(sendbuf[i], "POST ");
+				strcat(sendbuf[i], subdir);
+				strcat(sendbuf[i], filename1);
+				write(sock[i], sendbuf[i], strlen(sendbuf[i]) + 1);
+				write(sock[j], sendbuf[i], strlen(sendbuf[i]) + 1);
+				filelenth = filelenth1;
+				do {
+					if (BUFSIZE < filelenth) {
+						read = fread(sendbuf[i], 1, BUFSIZE, fp);
+						if (connect[i] == 1)
+							write(sock[i], sendbuf[i], read);
+						if (connect[j] == 1)
+							write(sock[j], sendbuf[i], read);
+						filelenth -= BUFSIZE;
+					}
+					else {
+						read = fread(sendbuf[i], 1, filelenth, fp);
+						if (connect[i] == 1)
+							write(sock[i], sendbuf[i], read);						if (connect[j] == 1)
+						if (connect[j] == 1)
+							write(sock[j], sendbuf[i], read);
+						filelenth = 0;
+					}
+				} while (filelenth > 0);
+				if (connect[i] == 1)
+					write(sock[i], sendbuf[i], 0);
+				if (connect[j] == 1)
+					write(sock[j], sendbuf[i], 0);
+				i = (hashvalue+1)%4;
+				j = (hashvalue + 2) % 4;
+				filename1[200] = " .3.";
+				strcat(filename1, filename);
+				strcpy(sendbuf[i], "POST ");
+				strcat(sendbuf[i], subdir);
+				strcat(sendbuf[i], filename1);
+				write(sock[i], sendbuf[i], strlen(sendbuf[i]) + 1);
+				write(sock[j], sendbuf[i], strlen(sendbuf[i]) + 1);
+				filelenth = filelenth1;
+				do {
+					if (BUFSIZE < filelenth) {
+						read = fread(sendbuf[i], 1, BUFSIZE, fp);
+						if (connect[i] == 1)
+							write(sock[i], sendbuf[i], read);
+						if (connect[j] == 1)
+							write(sock[j], sendbuf[i], read);
+						filelenth -= BUFSIZE;
+					}
+					else {
+						read = fread(sendbuf[i], 1, filelenth, fp);
+						if (connect[i] == 1)
+							write(sock[i], sendbuf[i], read);						if (connect[j] == 1)
+							if (connect[j] == 1)
+							write(sock[j], sendbuf[i], read);
+						filelenth = 0;
+					}
+				} while (filelenth > 0);
+				if (connect[i] == 1)
+					write(sock[i], sendbuf[i], 0);
+				if (connect[j] == 1)
+					write(sock[j], sendbuf[i], 0);
+				i = (hashvalue + 2) % 4;
+				j = (hashvalue + 3) % 4;
+				filename1[200] = " .4.";
+				strcat(filename1, filename);
+				strcpy(sendbuf[i], "POST ");
+				strcat(sendbuf[i], subdir);
+				strcat(sendbuf[i], filename1);
+				write(sock[i], sendbuf[i], strlen(sendbuf[i]) + 1);
+				write(sock[j], sendbuf[i], strlen(sendbuf[i]) + 1);
+				filelenth = filelenth1;
+				do {
+					read = fread(sendbuf[i], 1, BUFSIZE, fp);
+					if (connect[i] == 1)
+						write(sock[i], sendbuf[i], read);
+					if (connect[j] == 1)
+						write(sock[j], sendbuf[i], read);
+				} while (read > 0);
 			}
 			
 	}

@@ -175,6 +175,7 @@ void *connection_handler(void *sockfd) {
 			strcat(filename, pch);
 			int filensize = 0;
 			pch = strtok(NULL, " \n");
+			puts(filename);
 			FILE* fd= fopen(filename, "r");
 			int n = 0;
 			if (fd!=NULL)

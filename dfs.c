@@ -179,13 +179,19 @@ void *connection_handler(void *sockfd) {
 			int n = 0;
 			if (fd)
 			{
+				strcpy(sendbuf, "YES");
+				write(clfd, sendbuf, 4);
+				recv(clfd, sendbuf, BUFSIZE, 0);
 				while ((n=fread(sendbuf,sizeof(char),BUFSIZE, (FILE *)fd))>0)
 				{
 					write(clfd, sendbuf, n);
 				}
 				fclose(fd);
 			}
-			write(clfd, sendbuf, 0);
+			else {
+				strcpy(sendbuf, "NO");
+				write(clfd, sendbuf, 3);
+			}
 			
 		}
 		else if (strlen(pch) != 0 && strcmp(pch, "LIST")==0) {

@@ -164,7 +164,7 @@ int main(int argc, char * argv[]) {
 				}
 
 			}
-			if ((strncmp(commond, "PUT ", 4) == 0) && strlen(commond)>4) {
+			else if ((strncmp(commond, "PUT ", 4) == 0) && strlen(commond)>4) {
 				char* pch = commond;
 				pch = strtok(commond, " \n");
 				pch = strtok(NULL, " \n");
@@ -202,17 +202,17 @@ int main(int argc, char * argv[]) {
 					if (BUFSIZE < filelenth) {
 						read = fread(sendbuf[i], sizeof(char), BUFSIZE, fp);
 						if(connect[i]==1)
-							write(sock[i], sendbuf[i], read);
-						if(connect[j]==1)
-							write(sock[j], sendbuf[i], read);
-						filelenth -= BUFSIZE;
+write(sock[i], sendbuf[i], read);
+if (connect[j] == 1)
+write(sock[j], sendbuf[i], read);
+filelenth -= BUFSIZE;
 					}
 					else {
 						read = fread(sendbuf[i], sizeof(char), filelenth, fp);
 						if (connect[i] == 1)
 							write(sock[i], sendbuf[i], read);						if (connect[j] == 1)
-						if (connect[j] == 1)
-							write(sock[j], sendbuf[i], read);
+							if (connect[j] == 1)
+								write(sock[j], sendbuf[i], read);
 						filelenth = 0;
 					}
 				} while (filelenth > 0);
@@ -222,40 +222,7 @@ int main(int argc, char * argv[]) {
 				//puts(readbuf[i]);
 				i = hashvalue;
 				j = (hashvalue + 1) % 4;
-				strcpy(filename1 , ".2.");
-				strcat(filename1, filename);
-				strcpy(sendbuf[i], "PUT ");
-				strcat(sendbuf[i], subdir);
-				strcat(sendbuf[i], filename1);
-				write(sock[i], sendbuf[i], strlen(sendbuf[i]) + 1);
-				write(sock[j], sendbuf[i], strlen(sendbuf[i]) + 1);
-				filelenth = filelenth1;
-				do {
-					if (BUFSIZE < filelenth) {
-						read = fread(sendbuf[i], 1, BUFSIZE, fp);
-						if (connect[i] == 1)
-							write(sock[i], sendbuf[i], read);
-						if (connect[j] == 1)
-							write(sock[j], sendbuf[i], read);
-						filelenth -= BUFSIZE;
-					}
-					else {
-						read = fread(sendbuf[i], 1, filelenth, fp);
-						if (connect[i] == 1)
-							write(sock[i], sendbuf[i], read);						if (connect[j] == 1)
-						if (connect[j] == 1)
-							write(sock[j], sendbuf[i], read);
-						filelenth = 0;
-						sendbuf[i][read] = '\0';
-						puts(sendbuf[i]);
-					}
-				} while (filelenth > 0);
-				recv(sock[i], readbuf[i], BUFSIZE, 0);				
-				recv(sock[j], readbuf[i], BUFSIZE, 0);
-
-				i = (hashvalue + 1)%4;
-				j = (hashvalue + 2) % 4;
-				strcpy(filename1 , ".3.");
+				strcpy(filename1, ".2.");
 				strcat(filename1, filename);
 				strcpy(sendbuf[i], "PUT ");
 				strcat(sendbuf[i], subdir);
@@ -277,16 +244,18 @@ int main(int argc, char * argv[]) {
 						if (connect[i] == 1)
 							write(sock[i], sendbuf[i], read);						if (connect[j] == 1)
 							if (connect[j] == 1)
-							write(sock[j], sendbuf[i], read);
+								write(sock[j], sendbuf[i], read);
 						filelenth = 0;
+						sendbuf[i][read] = '\0';
+						puts(sendbuf[i]);
 					}
 				} while (filelenth > 0);
 				recv(sock[i], readbuf[i], BUFSIZE, 0);
-
 				recv(sock[j], readbuf[i], BUFSIZE, 0);
-				i = (hashvalue + 2) % 4;
-				j = (hashvalue + 3) % 4;
-				strcpy(filename1 ,".4.");
+
+				i = (hashvalue + 1) % 4;
+				j = (hashvalue + 2) % 4;
+				strcpy(filename1, ".3.");
 				strcat(filename1, filename);
 				strcpy(sendbuf[i], "PUT ");
 				strcat(sendbuf[i], subdir);
@@ -294,17 +263,87 @@ int main(int argc, char * argv[]) {
 				write(sock[i], sendbuf[i], strlen(sendbuf[i]) + 1);
 				write(sock[j], sendbuf[i], strlen(sendbuf[i]) + 1);
 				filelenth = filelenth1;
-				while (read = fread(sendbuf[i], 1, BUFSIZE, fp)>0) {
+				do {
+					if (BUFSIZE < filelenth) {
+						read = fread(sendbuf[i], 1, BUFSIZE, fp);
+						if (connect[i] == 1)
+							write(sock[i], sendbuf[i], read);
+						if (connect[j] == 1)
+							write(sock[j], sendbuf[i], read);
+						filelenth -= BUFSIZE;
+					}
+					else {
+						read = fread(sendbuf[i], 1, filelenth, fp);
+						if (connect[i] == 1)
+							write(sock[i], sendbuf[i], read);						if (connect[j] == 1)
+							if (connect[j] == 1)
+								write(sock[j], sendbuf[i], read);
+						filelenth = 0;
+					}
+				} while (filelenth > 0);
+				recv(sock[i], readbuf[i], BUFSIZE, 0);
+				recv(sock[j], readbuf[i], BUFSIZE, 0);
+				i = (hashvalue + 2) % 4;
+				j = (hashvalue + 3) % 4;
+				strcpy(filename1, ".4.");
+				strcat(filename1, filename);
+				strcpy(sendbuf[i], "PUT ");
+				strcat(sendbuf[i], subdir);
+				strcat(sendbuf[i], filename1);
+				write(sock[i], sendbuf[i], strlen(sendbuf[i]) + 1);
+				write(sock[j], sendbuf[i], strlen(sendbuf[i]) + 1);
+				filelenth = filelenth1;
+				while (read = fread(sendbuf[i], 1, BUFSIZE, fp) > 0) {
 					if (connect[i] == 1)
 						write(sock[i], sendbuf[i], read);
 					if (connect[j] == 1)
 						write(sock[j], sendbuf[i], read);
-				} 
+				}
 				recv(sock[i], readbuf[i], BUFSIZE, 0);
-
 				recv(sock[j], readbuf[i], BUFSIZE, 0);
 			}
-			
+			else if ((strncmp(commond, "GET ", 4)) == 0) && strlen(commond) > 4){
+			char *pch = commond;
+			pch = strtok(pch, " \n");
+			pch = strtok(pch, " \n");
+			char filename[200] = "";
+			strcpy(filename, pch);
+			pch = strtok(pch, " \n");
+			char subdir[200] = "";
+			if (pch != NULL) {
+				strcpy(subdir, pch);
+			}
+			char part[4][10];
+			strcpy(part[0], ".1.");
+			strcpy(part[1], ".2.");
+			strcpy(part[2], ".3.");
+			strcpy(part[3], ".4.");
+			int bit[4] = { 0,0,0,0, };
+			FILE * fp = open(filename, "w");
+			for (int i = 0; i < 4; i++) {
+				for (int j = 0; j < 4; j++)
+				{
+					if (bit[j] == 1)
+						continue;
+					char mes[200] = "GET ";
+					strcat(mes, part[j]);
+					strcat(mes, filename);
+					if (strlen(subdir) == 0) {
+						strcar(mes, " ");
+						strcar(mes,subdir)
+					}
+					write(sock[i], mes, strlen(mes)+1);
+					int n = recv(sock[i], readbuf[i], BUFSIZE, 0);
+					if (strcpy(readbuf[i], "YES")) {
+						bit[j] = 1;
+						write(sock[i], sendbuf[i], 1, 0);
+						while (n = recv(sock[i], readbuf[i], BUFSIZE, 0)) {
+							fwrite(readbuf[i], 1, n, fp);
+						}
+					}
+				}
+		}
+
 	}
 	return 0;
 		

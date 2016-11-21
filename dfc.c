@@ -302,6 +302,10 @@ int main(int argc, char * argv[]) {
 					if (connect[j] == 1)
 						write(sock[j], sendbuf[i], read);
 				} while (read > 0);
+				if (connect[i] == 1)
+					write(sock[i], sendbuf[i], 0);
+				if (connect[j] == 1)
+					write(sock[j], sendbuf[i], 0);
 			}
 			
 	}

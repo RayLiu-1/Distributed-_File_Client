@@ -197,9 +197,6 @@ int main(int argc, char * argv[]) {
 				strcat(sendbuf[i], filename1);
 				strcat(sendbuf[i], subdir);
 				write(sock[i], sendbuf[i], strlen(sendbuf[i])+ 1);
-				puts(sendbuf[i]);
-				puts(readbuf[i]);
-
 				write(sock[j], sendbuf[i], strlen(sendbuf[i]) + 1);
 				int read = 0;
 				do {
@@ -222,8 +219,6 @@ int main(int argc, char * argv[]) {
 						filelenth = 0;
 					}
 				} while (filelenth > 0);
-				write(sock[i], sendbuf[i], 0);
-				write(sock[j], sendbuf[i], 0);
 				recv(sock[i], readbuf[i], BUFSIZE, 0);
 				puts(readbuf[i]);
 
@@ -287,8 +282,6 @@ int main(int argc, char * argv[]) {
 						filelenth = 0;
 					}
 				} while (filelenth > 0);
-				write(sock[i], sendbuf[i], 0);
-				write(sock[j], sendbuf[i], 0);
 				recv(sock[i], readbuf[i], BUFSIZE, 0);
 				puts(readbuf[i]);
 
@@ -302,17 +295,13 @@ int main(int argc, char * argv[]) {
 				write(sock[i], sendbuf[i], strlen(sendbuf[i]) + 1);
 				write(sock[j], sendbuf[i], strlen(sendbuf[i]) + 1);
 				filelenth = filelenth1;
-				do {
-					read = fread(sendbuf[i], 1, BUFSIZE, fp);
+				while (read = fread(sendbuf[i], 1, BUFSIZE, fp)>0) {
 					if (connect[i] == 1)
 						write(sock[i], sendbuf[i], read);
 					if (connect[j] == 1)
 						write(sock[j], sendbuf[i], read);
-				} while (read > 0);
-				write(sock[i], sendbuf[i], 0);
-				write(sock[j], sendbuf[i], 0);
+				} 
 				recv(sock[i], readbuf[i], BUFSIZE, 0);
-
 			}
 			
 	}

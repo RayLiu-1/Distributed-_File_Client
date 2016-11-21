@@ -144,13 +144,13 @@ void *connection_handler(void *sockfd) {
 			strcpy(filename1, pch);
 			pch = strtok(NULL, " \n");
 			char subdir[200];
-			strcpy(subdir, pch);
+			strcpy(subdir, pch);puts(readbuf);
 			if (strlen(subdir) != 0 && subdir[strlen(subdir) - 1] == '/')
 			{
 				strcat(filename, subdir);
 			}
 			strcat(filename, filename1);
-			FILE* fd= fopen(filename, "w");puts(filename);
+			FILE* fd= fopen(filename, "w");
 			if (!fd)
 				perror("fail to open file");
 			int n = 0;

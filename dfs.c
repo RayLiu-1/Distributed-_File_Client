@@ -171,13 +171,13 @@ void *connection_handler(void *sockfd) {
 			memset(filename, 0, sizeof(filename));
 			strcpy(filename, filepath);
 			strcat(filename, "/");
-			pch = strtok(NULL, " ");
+			pch = strtok(NULL, " \n");
 			strcat(filename, pch);
 			int filensize = 0;
-			pch = strtok(NULL, " ");
+			pch = strtok(NULL, " \n");
 			FILE* fd= fopen(filename, "r");
 			int n = 0;
-			if (fd)
+			if (fd!=NULL)
 			{
 				strcpy(sendbuf, "YES");
 				write(clfd, sendbuf, 4);

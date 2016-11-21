@@ -329,14 +329,14 @@ filelenth -= BUFSIZE;
 						strcat(mes, part[j]);
 						strcat(mes, filename);
 						if (strlen(subdir) == 0) {
-							strcar(mes, " ");
-							strcar(mes, subdir)
+							strcat(mes, " ");
+							strcat(mes, subdir)
 						}
 						write(sock[i], mes, strlen(mes) + 1);
 						int n = recv(sock[i], readbuf[i], BUFSIZE, 0);
 						if (strcpy(readbuf[i], "YES")) {
 							bit[j] = 1;
-							write(sock[i], sendbuf[i], 1, 0);
+							write(sock[i], sendbuf[i], 1);
 							while (n = recv(sock[i], readbuf[i], BUFSIZE, 0)) {
 								fwrite(readbuf[i], 1, n, fp);
 							}

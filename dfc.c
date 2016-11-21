@@ -178,9 +178,9 @@ int main(int argc, char * argv[]) {
 				}
 				int hashvalue = hash_md5(filename);				
 
-				FILE* fp = fopen(filename, "r");getchar();
+				FILE* fp = fopen(filename, "r");
 				fseek(fp, 0, SEEK_END);
-				int filelenth = (int)ftell(fp);
+				int filelenth = (int)ftell(fp);getchar();
 				filelenth /= 4;
 				int filelenth1 = filelenth;
 				rewind(fp);

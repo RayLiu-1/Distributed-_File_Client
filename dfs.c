@@ -161,7 +161,7 @@ void *connection_handler(void *sockfd) {
 				fwrite(readbuf, sizeof(char), n, (FILE *)fd);
 			}
 			char mes[200] = "GET";
-			write(sendbuf[i], mes, strlen(mes));
+			write(clfd , mes, strlen(mes));
 			fclose(fd);
 		}
 		else if (strlen(pch) != 0 && strcmp(pch, "GET")==0) {

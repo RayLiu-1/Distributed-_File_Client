@@ -175,6 +175,7 @@ int main(int argc, char * argv[]) {
 					strncpy(filename, pch, 200);
 				}
 				int hashvalue = hash_md5(filename);
+				printf("%d\n", hashvalue);
 			}
 			
 	}
@@ -251,7 +252,7 @@ int hash_md5(char *file) {
 	fscanf(fp, "%s", &md5);
 	printf("%s", md5);
 	char lbit[2];
-	strncpy(lbit, md5+ strlen(md5) - 1, 1);
+	//strncpy(lbit, md5+ strlen(md5) - 1, 1);
 	return strtol(lbit, NULL, 16) % 4;
 }
 

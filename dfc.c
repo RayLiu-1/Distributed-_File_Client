@@ -185,19 +185,18 @@ int main(int argc, char * argv[]) {
 				fseek(fp, 0L, SEEK_END);
 				int filelenth = (int)ftell(fp);
 				filelenth /= 4;
-				printf("%d\n", filelenth);
+				//printf("%d\n", filelenth);
 				int filelenth1 = filelenth;
 				rewind(fp);
 				int i = (hashvalue + 4 - 1) % 4;
 				int j = hashvalue;
-
 				char filename1[200] = ".1.";
 				strcat(filename1, filename);
 				strcpy(sendbuf[i], "PUT ");
 				strcat(sendbuf[i], filename1);
 				strcat(sendbuf[i], subdir);
 				write(sock[i], sendbuf[i], strlen(sendbuf[i])+ 1);
-				write(sock[j], sendbuf[i], strlen(sendbuf[i]) + 1);
+				write(sock[j], sendbuf[i], strlen(sendbuf[i])+ 1);
 				int read = 0;
 				do {
 					if (BUFSIZE < filelenth) {
@@ -250,8 +249,6 @@ int main(int argc, char * argv[]) {
 						filelenth = 0;
 					}
 				} while (filelenth > 0);
-				write(sock[i], sendbuf[i], 0);
-				write(sock[j], sendbuf[i], 0);
 				recv(sock[i], readbuf[i], BUFSIZE, 0);
 				i = (hashvalue+1)%4;
 				j = (hashvalue + 2) % 4;

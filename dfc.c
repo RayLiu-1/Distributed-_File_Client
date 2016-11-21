@@ -164,7 +164,16 @@ int main(int argc, char * argv[]) {
 
 			}
 			if ((strncmp(commond, "POST ", 5) == 0) && strlen(commond)>5) {
-
+				char pch = commond;
+				pch = strtok(commond, " ");
+				pch = strtok(NULL, " ");
+				char filename[200];
+				strncpy(filename, pch, 200);
+				pch = strtok(NULL, " ");
+				if (pch != NULL) {
+					strncpy(filename, pch, 200);
+				}
+				int hashvalue = hash_md5(filename);
 			}
 			
 	}

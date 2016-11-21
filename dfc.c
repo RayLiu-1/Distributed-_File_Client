@@ -203,7 +203,7 @@ int main(int argc, char * argv[]) {
 				do {
 					if (BUFSIZE < filelenth) {
 						read = fread(sendbuf[i], 1, BUFSIZE, fp);
-						puts(sendbuf);
+						puts(sendbuf[i]);
 						if(connect[i]==1)
 							write(sock[i], sendbuf[i], read);
 						if(connect[j]==1)

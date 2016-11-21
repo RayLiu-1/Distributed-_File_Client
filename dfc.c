@@ -305,10 +305,10 @@ filelenth -= BUFSIZE;
 			else if ((strncmp(commond, "GET ", 4)) == 0 && strlen(commond) > 4){
 				char *pch = commond;
 				pch = strtok(pch, " \n");
-				pch = strtok(pch, " \n");
+				pch = strtok(NULL, " \n");
 				char filename[200] = "";
 				strcpy(filename, pch);
-				pch = strtok(pch, " \n");
+				pch = strtok(NULL, " \n");
 				char subdir[200] = "";
 				if (pch != NULL) {
 					strcpy(subdir, pch);

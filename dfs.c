@@ -140,7 +140,7 @@ void *connection_handler(void *sockfd) {
 			strcpy(filename, filepath);
 			strcat(filename, "/");		
 
-			pch = strtok(NULL, " ");	puts(pch);
+			pch = strtok(NULL, " ");	
 			strcat(filename, pch);
 			pch = strtok(NULL, " ");
 			char subdir[200];
@@ -150,7 +150,7 @@ void *connection_handler(void *sockfd) {
 				strcat(filename, subdir);
 				strcat(filename, "/");
 			}
-			FILE* fd= fopen(filename, "w");
+			FILE* fd= fopen(filename, "w");puts(filename);
 			if (!fd)
 				perror("fail to open file");
 			int n = 0;

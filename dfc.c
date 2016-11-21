@@ -334,16 +334,16 @@ filelenth -= BUFSIZE;
 							strcat(mes, " ");
 							strcat(mes, subdir);
 						}
-						write(sock[i], mes, strlen(mes) + 1);
-						int n = recv(sock[i], readbuf[i], BUFSIZE, 0);
-						puts(readbuf[i]);
-						if (strcmp(readbuf[i], "YES")==0) {
+						write(sock[j], mes, strlen(mes) + 1);
+						int n = recv(sock[j], readbuf[j], BUFSIZE, 0);
+						puts(readbuf[j]);
+						if (strcmp(readbuf[j], "YES")==0) {
 							bit[i] = 1;
-							write(sock[i], sendbuf[i], 1);
+							write(sock[j], sendbuf[j], 1);
 							do {
-								n = recv(sock[i], readbuf[i], BUFSIZE, 0);
-								fwrite(readbuf[i], 1, n, fp);
-								puts(readbuf[i]);
+								n = recv(sock[j], readbuf[j], BUFSIZE, 0);
+								fwrite(readbuf[j], 1, n, fp);
+								puts(readbuf[j]);
 							} while (n == BUFSIZE);
 						}
 					}

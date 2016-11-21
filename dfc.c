@@ -245,7 +245,7 @@ int set_config(char* file) {
 
 int hash_md5(char *file) {
 	char cmd[200];
-	sprintf(cmd, "MD5SUM %s", file);
+	sprintf(cmd, "md5sum %s", file);
 	FILE *fp = popen(cmd, "r");
 	int md5 = 0;
 	fscanf(fp, "%x", &md5);

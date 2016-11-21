@@ -197,6 +197,7 @@ int main(int argc, char * argv[]) {
 				strcat(sendbuf[i], subdir);
 				strcat(sendbuf[i], filename1);
 				write(sock[i], sendbuf[i], strlen(sendbuf[i])+ 1);
+				puts(sendbuf[i]);
 				write(sock[j], sendbuf[i], strlen(sendbuf[i]) + 1);
 				int read = 0;
 				do {

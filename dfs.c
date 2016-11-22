@@ -16,6 +16,9 @@
 #include <stdlib.h>
 #include <dirent.h>
 
+#include <sys/stat.h>
+#include <unistd.h>
+
 #define BUFSIZE 4096
 #define QUESIZE 40// maximum number of client connections
 char DocumentRoot[200] = ".";
@@ -224,6 +227,22 @@ void *connection_handler(void *sockfd) {
 			write(clfd, mes, 4);
 			recv(clfd, readbuf, BUFSIZE, 0);
 
+		}
+		else if (strlen(pch) != 0 && strcmp(pch, "MKDIR") == 0) {
+			pch = strtok(NULL, " \n");
+			char subdir[200];
+			strcpy(subdir, pch);
+			if (strlen(subdir) > 0) {
+				subdir[strlen(subdir) - 1] = 0;
+			}
+			char dir[200];
+			strcpy(dir, filepath);
+			strcat(dir, "/");
+			strcat(dir, subdir);
+			struct stat st = { 0 };
+			if (stat(dir, &st) == -1) {
+				mkdir(dir, 0700);
+			}
 		}
 	}
 	if(read_size==0)

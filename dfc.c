@@ -374,7 +374,7 @@ int main(int argc, char * argv[]) {
 						}
 						write(sock[j], mes, strlen(mes) + 1);
 						int n = recv(sock[j], readbuf[j], BUFSIZE, 0);
-						puts(readbuf[j]);
+						//puts(readbuf[j]);
 						if (strcmp(readbuf[j], "YES")==0) {
 							bit[i] = 1;
 							write(sock[j], sendbuf[j], 1);
@@ -382,12 +382,17 @@ int main(int argc, char * argv[]) {
 								n = recv(sock[j], readbuf[j], BUFSIZE, 0);
 								decrypt(readbuf[j], password, n);
 								fwrite(readbuf[j], 1, n, fp);
-								puts(readbuf[j]);
+								//puts(readbuf[j]);
 							} while (n == BUFSIZE);
 						}
 					}
 				}
 				fclose(fp);
+			}
+			else if ((strncmp(commond, "MKDIR ", 6)) == 0 && strlen(commond) > 4) {
+				for (int i = 0; i < 4; i++) {
+					write(sock[i], commond, strlen(commond) + 1);
+				}
 			}
 
 	}

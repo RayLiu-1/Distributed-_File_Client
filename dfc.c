@@ -129,8 +129,7 @@ int main(int argc, char * argv[]) {
 				for (int i = 0; i < 4; i++) {
 					if (connect[i] == 1) {
 						while (read_size = recv(sock[i], readbuf[i], BUFSIZE, 0)>0) {
-							puts(readbuf[i]);
-							printf("server%d\n", i);
+							write(sock[i], readbuf[i], 1);
 							if (strcmp(readbuf[i], "...") == 0) {
 								break;
 							}

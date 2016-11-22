@@ -215,12 +215,15 @@ void *connection_handler(void *sockfd) {
 					{
 						//puts(dir->d_name);
 						write(clfd, dir->d_name, 256);
+						recv(clfd, readbuf, BUFSIZE, 0);
 					}
 				}
 				closedir(dp);
 			}
 			char mes[20] = "...";
 			write(clfd, mes, 4);
+			recv(clfd, readbuf, BUFSIZE, 0);
+
 		}
 	}
 	if(read_size==0)

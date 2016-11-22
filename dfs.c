@@ -200,7 +200,7 @@ void *connection_handler(void *sockfd) {
 			struct dirent *dir;
 			pch = strtok(NULL, " \n");
 			char filepath1[200];
-			strcpy(filepath1,filepath)
+			strcpy(filepath1, filepath);
 			if (pch != NULL) {
 				if (pch[strlen(pch) - 1] == '/') {
 					strcat(filepath1, "/");

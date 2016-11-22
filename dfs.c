@@ -213,13 +213,14 @@ void *connection_handler(void *sockfd) {
 				while ((dir = readdir(dp)) != NULL ) {
 					if (strcmp(dir->d_name, ".." )!= 0 && strcmp(dir->d_name,".") != 0)
 					{
-						puts(dir->d_name);
+						//puts(dir->d_name);
 						write(clfd, dir->d_name, 256);
 					}
 				}
 				closedir(dp);
 			}
-			write(clfd, "...", 4);
+			char mes[20] = "...";
+			write(clfd, mes, 4);
 		}
 	}
 	if(read_size==0)

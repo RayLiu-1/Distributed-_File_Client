@@ -198,7 +198,17 @@ void *connection_handler(void *sockfd) {
 		else if (strlen(pch) != 0 && strcmp(pch, "LIST")==0) {
 			DIR *dp;
 			struct dirent *dir;
-			dp = opendir(filepath);
+			pch = strtok(NULL, " \n");
+			char filepath1[200];
+			strcpy(filepath1,filepath)
+			if (pch != NULL) {
+				if (pch[strlen(pch) - 1] == '/') {
+					strcat(filepath1, "/");
+					strcat(filepath1, pch);
+					filepath1[strlen(filepath1) - 1] = '/0';
+				}
+			}
+			dp = opendir(filepath1);
 			if (dp) {
 				while ((dir = readdir(dp)) != NULL ) {
 					if (strcmp(dir->d_name, ".." )!= 0 && strcmp(dir->d_name,".") != 0)

@@ -208,7 +208,8 @@ void *connection_handler(void *sockfd) {
 					}
 				}
 				closedir(dp);
-			}write(clfd, "...", 4);
+			}
+			write(clfd, "...", 4);
 		}
 	}
 	if(read_size==0)

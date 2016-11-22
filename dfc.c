@@ -198,11 +198,14 @@ int main(int argc, char * argv[]) {
 				strcat(filename1, filename);
 				strcpy(sendbuf[i], "PUT ");
 				strcat(sendbuf[i], filename1);
+				if (strlen(subdir) > 0) {
+					strcat(senbuf[i], " ");
+				}
 				strcat(sendbuf[i], subdir);
 				if(connect[i] ==1)
-				write(sock[i], sendbuf[i], strlen(sendbuf[i])+ 1);
+					write(sock[i], sendbuf[i], strlen(sendbuf[i])+ 1);
 				if (connect[j] == 1)
-				write(sock[j], sendbuf[i], strlen(sendbuf[i])+ 1);
+					write(sock[j], sendbuf[i], strlen(sendbuf[i])+ 1);
 				int read = 0;
 				do {
 					if (BUFSIZE < filelenth) {
@@ -234,8 +237,11 @@ int main(int argc, char * argv[]) {
 				strcpy(filename1, ".2.");
 				strcat(filename1, filename);
 				strcpy(sendbuf[i], "PUT ");
-				strcat(sendbuf[i], subdir);
 				strcat(sendbuf[i], filename1);
+				if (strlen(subdir) > 0) {
+					strcat(senbuf[i], " ");
+				}
+				strcat(sendbuf[i], subdir);
 				if (connect[i] == 1)
 				write(sock[i], sendbuf[i], strlen(sendbuf[i]) + 1);
 				if (connect[j] == 1)
@@ -271,8 +277,11 @@ int main(int argc, char * argv[]) {
 				strcpy(filename1, ".3.");
 				strcat(filename1, filename);
 				strcpy(sendbuf[i], "PUT ");
-				strcat(sendbuf[i], subdir);
 				strcat(sendbuf[i], filename1);
+				if (strlen(subdir) > 0) {
+					strcat(senbuf[i], " ");
+				}
+				strcat(sendbuf[i], subdir);
 				if (connect[i] == 1)
 					write(sock[i], sendbuf[i], strlen(sendbuf[i]) + 1);
 				if (connect[j] == 1)
@@ -309,8 +318,11 @@ int main(int argc, char * argv[]) {
 				strcpy(filename1, ".4.");
 				strcat(filename1, filename);
 				strcpy(sendbuf[i], "PUT ");
-				strcat(sendbuf[i], subdir);
 				strcat(sendbuf[i], filename1);
+				if (strlen(subdir) > 0) {
+					strcat(senbuf[i], " ");
+				}
+				strcat(sendbuf[i], subdir);
 				if(connect[i] == 1)
 					write(sock[i], sendbuf[i], strlen(sendbuf[i]) + 1);
 				if (connect[j] == 1)

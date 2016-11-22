@@ -199,7 +199,7 @@ int main(int argc, char * argv[]) {
 				strcpy(sendbuf[i], "PUT ");
 				strcat(sendbuf[i], filename1);
 				if (strlen(subdir) > 0) {
-					strcat(senbuf[i], " ");
+					strcat(sendbuf[i], " ");
 				}
 				strcat(sendbuf[i], subdir);
 				if(connect[i] ==1)
@@ -239,7 +239,7 @@ int main(int argc, char * argv[]) {
 				strcpy(sendbuf[i], "PUT ");
 				strcat(sendbuf[i], filename1);
 				if (strlen(subdir) > 0) {
-					strcat(senbuf[i], " ");
+					strcat(sendbuf[i], " ");
 				}
 				strcat(sendbuf[i], subdir);
 				if (connect[i] == 1)
@@ -279,7 +279,7 @@ int main(int argc, char * argv[]) {
 				strcpy(sendbuf[i], "PUT ");
 				strcat(sendbuf[i], filename1);
 				if (strlen(subdir) > 0) {
-					strcat(senbuf[i], " ");
+					strcat(sendbuf[i], " ");
 				}
 				strcat(sendbuf[i], subdir);
 				if (connect[i] == 1)
@@ -320,7 +320,7 @@ int main(int argc, char * argv[]) {
 				strcpy(sendbuf[i], "PUT ");
 				strcat(sendbuf[i], filename1);
 				if (strlen(subdir) > 0) {
-					strcat(senbuf[i], " ");
+					strcat(sendbuf[i], " ");
 				}
 				strcat(sendbuf[i], subdir);
 				if(connect[i] == 1)

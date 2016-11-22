@@ -128,7 +128,11 @@ int main(int argc, char * argv[]) {
 				}
 				for (int i = 0; i < 4; i++) {
 					if (connect[i] == 1) {
+
 						while (read_size = recv(sock[i], readbuf[i], BUFSIZE, 0)>0) {
+							if (strcmp(readbuf[i], "...") == 0) {
+								break;
+							}
 							if (strlen(readbuf[i])>4 && readbuf[i][2]=='.'&&readbuf[i][0] == '.' && (readbuf[i][1] == '1' || readbuf[i][1] == '2' || readbuf[i][1] == '3' || readbuf[i][1] == '4')) {
 								int find = 0;
 								for (int j = 0; j < filesize; j++) {
@@ -195,7 +199,9 @@ int main(int argc, char * argv[]) {
 				strcpy(sendbuf[i], "PUT ");
 				strcat(sendbuf[i], filename1);
 				strcat(sendbuf[i], subdir);
+				if(connect[i] ==1)
 				write(sock[i], sendbuf[i], strlen(sendbuf[i])+ 1);
+				if (connect[j] == 1)
 				write(sock[j], sendbuf[i], strlen(sendbuf[i])+ 1);
 				int read = 0;
 				do {
@@ -213,13 +219,14 @@ int main(int argc, char * argv[]) {
 						encrypt(sendbuf[i], password, read);
 						if (connect[i] == 1)
 							write(sock[i], sendbuf[i], read);						if (connect[j] == 1)
-							if (connect[j] == 1)
+							if (connect[i] == 1)
 								write(sock[j], sendbuf[i], read);
 						filelenth = 0;
 					}
 				} while (filelenth > 0);
+				if (connect[i] == 1)
 				recv(sock[i], readbuf[i], BUFSIZE, 0);
-
+				if (connect[j] == 1)
 				recv(sock[j], readbuf[i], BUFSIZE, 0);
 				//puts(readbuf[i]);
 				i = hashvalue;
@@ -229,7 +236,9 @@ int main(int argc, char * argv[]) {
 				strcpy(sendbuf[i], "PUT ");
 				strcat(sendbuf[i], subdir);
 				strcat(sendbuf[i], filename1);
+				if (connect[i] == 1)
 				write(sock[i], sendbuf[i], strlen(sendbuf[i]) + 1);
+				if (connect[j] == 1)
 				write(sock[j], sendbuf[i], strlen(sendbuf[i]) + 1);
 				filelenth = filelenth1;
 				do {
@@ -246,19 +255,17 @@ int main(int argc, char * argv[]) {
 					else {
 						read = fread(sendbuf[i], 1, filelenth, fp);
 						encrypt(sendbuf[i], password, read);
-
 						if (connect[i] == 1)
 							write(sock[i], sendbuf[i], read);						if (connect[j] == 1)
 							if (connect[j] == 1)
 								write(sock[j], sendbuf[i], read);
 						filelenth = 0;
-						sendbuf[i][read] = '\0';
-						puts(sendbuf[i]);
 					}
 				} while (filelenth > 0);
-				recv(sock[i], readbuf[i], BUFSIZE, 0);
-				recv(sock[j], readbuf[i], BUFSIZE, 0);
-
+				if (connect[i] == 1)
+					recv(sock[i], readbuf[i], BUFSIZE, 0);
+				if (connect[j] == 1)
+					recv(sock[j], readbuf[i], BUFSIZE, 0);
 				i = (hashvalue + 1) % 4;
 				j = (hashvalue + 2) % 4;
 				strcpy(filename1, ".3.");
@@ -266,8 +273,10 @@ int main(int argc, char * argv[]) {
 				strcpy(sendbuf[i], "PUT ");
 				strcat(sendbuf[i], subdir);
 				strcat(sendbuf[i], filename1);
-				write(sock[i], sendbuf[i], strlen(sendbuf[i]) + 1);
-				write(sock[j], sendbuf[i], strlen(sendbuf[i]) + 1);
+				if (connect[i] == 1)
+					write(sock[i], sendbuf[i], strlen(sendbuf[i]) + 1);
+				if (connect[j] == 1)
+					write(sock[j], sendbuf[i], strlen(sendbuf[i]) + 1);
 				filelenth = filelenth1;
 				do {
 					if (BUFSIZE < filelenth) {
@@ -291,8 +300,10 @@ int main(int argc, char * argv[]) {
 						filelenth = 0;
 					}
 				} while (filelenth > 0);
-				recv(sock[i], readbuf[i], BUFSIZE, 0);
-				recv(sock[j], readbuf[i], BUFSIZE, 0);
+				if (connect[i] == 1)
+					recv(sock[i], readbuf[i], BUFSIZE, 0);
+				if (connect[j] == 1)
+					recv(sock[j], readbuf[i], BUFSIZE, 0);
 				i = (hashvalue + 2) % 4;
 				j = (hashvalue + 3) % 4;
 				strcpy(filename1, ".4.");
@@ -300,8 +311,10 @@ int main(int argc, char * argv[]) {
 				strcpy(sendbuf[i], "PUT ");
 				strcat(sendbuf[i], subdir);
 				strcat(sendbuf[i], filename1);
-				write(sock[i], sendbuf[i], strlen(sendbuf[i]) + 1);
-				write(sock[j], sendbuf[i], strlen(sendbuf[i]) + 1);
+				if(connect[i] == 1)
+					write(sock[i], sendbuf[i], strlen(sendbuf[i]) + 1);
+				if (connect[j] == 1)
+					write(sock[j], sendbuf[i], strlen(sendbuf[i]) + 1);
 				filelenth = filelenth1;
 				while (read = fread(sendbuf[i], 1, BUFSIZE, fp) > 0) {
 					encrypt(sendbuf[i], password, read);
@@ -310,8 +323,10 @@ int main(int argc, char * argv[]) {
 					if (connect[j] == 1)
 						write(sock[j], sendbuf[i], read);
 				}
-				recv(sock[i], readbuf[i], BUFSIZE, 0);
-				recv(sock[j], readbuf[i], BUFSIZE, 0);
+				if (connect[i] == 1)
+					recv(sock[i], readbuf[i], BUFSIZE, 0);
+				if (connect[j] == 1)
+					recv(sock[j], readbuf[i], BUFSIZE, 0);
 			}
 			else if ((strncmp(commond, "GET ", 4)) == 0 && strlen(commond) > 4){
 				char *pch = commond;

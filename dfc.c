@@ -133,6 +133,7 @@ int main(int argc, char * argv[]) {
 							if (strcmp(readbuf[i], "...") == 0) {
 								break;
 							}
+							puts(readbuf[i]);
 							if (strlen(readbuf[i])>3 && readbuf[i][2]=='.'&&readbuf[i][0] == '.' && (readbuf[i][1] == '1' || readbuf[i][1] == '2' || readbuf[i][1] == '3' || readbuf[i][1] == '4')) {
 								int find = 0;
 								for (int j = 0; j < filesize; j++) {

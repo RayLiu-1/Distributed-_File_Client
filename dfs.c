@@ -205,7 +205,7 @@ void *connection_handler(void *sockfd) {
 				if (pch[strlen(pch) - 1] == '/') {
 					strcat(filepath1, "/");
 					strcat(filepath1, pch);
-					filepath1[strlen(filepath1) - 1] = '/0';
+					filepath1[strlen(filepath1) - 1] = 0;
 				}
 			}
 			dp = opendir(filepath1);
